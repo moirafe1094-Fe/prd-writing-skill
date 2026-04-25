@@ -1,0 +1,3 @@
+display_name: PRD Write
+short_description: Clarify product needs, prototype flows, and write structured PRDs.
+default_prompt: Turn a product idea, draft, or prototype into a complete PRD with flowcharts, page requirements, analytics, and acceptance criteria.
