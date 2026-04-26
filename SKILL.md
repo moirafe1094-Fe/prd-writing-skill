@@ -1,6 +1,6 @@
 ---
 name: prd-write
-description: Structured product requirement writing workflow for turning ideas, Feishu docs, PRD drafts, HTML prototypes, app/mini-program/PC demos, or screenshots into a complete PRD. Use when the user asks to write, update, rewrite, review-then-write, or directly publish a PRD/需求文档/产品方案, especially when the work should first clarify requirements with brainstorming or superpower, then build or inspect a prototype demo, then write a PRD with background, roles, permissions, business flowchart, requirement description, analytics events, and acceptance checklist.
+description: Structured product requirement writing workflow for turning ideas, Feishu docs, PRD drafts, HTML prototypes, app/mini-program/PC demos, or screenshots into a complete PRD. Use when the user asks to write, update, rewrite, review-then-write, or directly publish a PRD/需求文档/产品方案, especially when the work should first inventory source materials, clarify requirements with brainstorming or Superpowers, create a requirement brief, design page/state inventory, build or inspect a prototype demo, then write a PRD with background, roles, permissions, business flowchart, requirement description, analytics events, acceptance checklist, and Feishu-ready screenshots.
 ---
 
 # PRD Write
@@ -9,15 +9,31 @@ description: Structured product requirement writing workflow for turning ideas, 
 
 Run the workflow in this order:
 
-1. Clarify requirements with Superpowers `using-superpowers` + `brainstorming`, or a local brainstorming pass if Superpowers is unavailable.
-2. Generate a first-pass visual prototype with image2/imagegen from the clarified product description.
-3. Build, read, or refine an interactive HTML demo based on that visual prototype to validate real interactions.
-4. Capture interactive demo screens and optionally redraw them with image2/imagegen for a cleaner PRD presentation.
-5. Write the PRD with the user's PRD template and update only the explicitly targeted document.
+1. Inventory source materials and mark the single write target; treat all other Feishu links as read-only references.
+2. Clarify requirements with Superpowers `using-superpowers` + `brainstorming`, or a local brainstorming pass if Superpowers is unavailable.
+3. Produce a requirement brief and get alignment before design-heavy work.
+4. Create a page/state inventory before image generation so visual work does not invent workflow coverage.
+5. Generate a first-pass visual prototype with image2/imagegen from the clarified product description.
+6. Build, read, or refine an interactive HTML demo based on that visual prototype to validate real interactions.
+7. Verify the demo flow, capture key screens, and optionally redraw them with image2/imagegen for a cleaner PRD presentation.
+8. Prepare business artifacts: flowchart, status machine, roles/permissions, fields/data dependencies, analytics, and acceptance checks.
+9. Write the PRD with the user's PRD template, self-check it, then update only the explicitly targeted document.
 
 Do not jump straight into PRD writing when the product path is still blurry.
 
 ## Workflow
+
+### 0. Source Inventory And Target Safety
+
+Before brainstorming or editing, list the available inputs and classify each item.
+
+- Target document: the one document/wiki/page that may be modified.
+- Read-only references: Feishu docs, PRD examples, flowcharts, meeting notes, screenshots, HTML demos, data tables, API docs, or prior drafts.
+- Prototype assets: current HTML files, screenshots, image2 drafts, redrawn images, and generated artifacts.
+- External systems: CRM, payment, inventory, approval, messaging, data warehouse, or manual operations.
+- Constraints: deadline, platform, brand/design system, compliance, money/data risk, and permission boundaries.
+
+If there is any ambiguity about which Feishu document may be edited, stop and ask before writeback.
 
 ### 1. Requirement Brainstorming
 
@@ -35,11 +51,40 @@ Clarify these points before writing:
 - Permissions, state changes, money/data/compliance risks, and audit needs.
 - Open questions that block implementation versus details that can be assumed.
 
-When the user already gives enough context, summarize assumptions and proceed.
+Output a short requirement brief before visual or HTML work:
 
-### 2. First-Pass Visual Prototype
+- One-sentence product intent.
+- Business goal and success signal.
+- Users/roles and permission boundaries.
+- In scope, out of scope, and explicit non-goals.
+- Main success path and important exception paths.
+- Key assumptions and open questions.
+- Proposed next artifact: image prototype, HTML demo, PRD outline, or Feishu writeback.
 
-After requirement brainstorming and before building HTML, use image2/imagegen or an equivalent image generation capability to create a first-pass static prototype from the clarified product description.
+When the user already gives enough context, summarize assumptions and proceed, but still keep the brief as the source of truth.
+
+### 2. Page And State Inventory
+
+Create a screen/module inventory before image generation or HTML work.
+
+For each page or module, capture:
+
+- Platform and layout type: mini-program/app two-column PRD layout, PC vertical PRD layout, backend/admin, or mixed.
+- Entry condition and actor.
+- Primary user decision or action.
+- Required displayed fields and data source.
+- Actions, validation, and next state.
+- Empty, loading, disabled, expired, failed, repeated-submit, and permission-denied states.
+- Related tracking events.
+
+For workflows driven by task/order/payment/approval status, create a status table before writing page details:
+
+| Status | Definition | Entry condition | User/system action | Next status |
+| --- | --- | --- | --- | --- |
+
+### 3. First-Pass Visual Prototype
+
+After the requirement brief and page/state inventory, use image2/imagegen or an equivalent image generation capability to create a first-pass static prototype from the clarified product description.
 
 Use this node to:
 
@@ -54,7 +99,7 @@ Rules:
 - Label unresolved areas as assumptions in discussion, not as final PRD facts.
 - Treat this visual prototype as a design draft, not as source-of-truth interaction logic.
 
-### 3. Interactive HTML Demo
+### 4. Interactive HTML Demo
 
 Build, read, or refine an interactive HTML demo before writing the PRD.
 
@@ -66,7 +111,12 @@ Build, read, or refine an interactive HTML demo before writing the PRD.
 - Capture key screens for the PRD. Prefer actual prototype screenshots when available.
 - List screen inventory, user actions, state transitions, empty/error states, and backend dependencies.
 
-### 4. PRD Screenshot Redraw
+Validate the demo with a compact interaction matrix:
+
+| Screen | Actor | Action | Expected result | State change | Edge case |
+| --- | --- | --- | --- | --- | --- |
+
+### 5. PRD Screenshot Redraw
 
 Before final Feishu writeback, decide whether the prototype screenshots should be redrawn.
 
@@ -86,16 +136,19 @@ Rules:
 
 Read `references/page-description-layout.md` for how first-pass visuals, HTML screenshots, and redrawn PRD images should be placed or tracked.
 
-### 5. Business Flowchart
+### 6. Business Artifacts
 
-Create a flowchart before or during PRD writing.
+Create the business artifacts before or during PRD writing.
 
-- Use Mermaid for draft logic.
-- When writing to Feishu and the PRD needs a process diagram, insert a Feishu whiteboard and write the flowchart there.
-- Include the main path, branching by role/status, exception paths, and terminal states.
-- Use product language in node labels, not implementation jargon.
+- Business flowchart: use Mermaid for draft logic; when writing to Feishu and the PRD needs a process diagram, insert a Feishu whiteboard and write the flowchart there.
+- Roles and permissions matrix: role, entry point, viewable data, allowed action, forbidden action, audit requirement.
+- Status machine: status definition, entry condition, trigger action, next status, exception/fallback.
+- Field/data dictionary: field name, meaning, source of truth, required/optional, validation, display rule.
+- Analytics plan: event, trigger, properties, purpose, success/failure result, and QA check.
 
-### 6. PRD Composition
+Use product language in labels, not implementation jargon.
+
+### 7. PRD Composition
 
 Read `references/prd-template.md` when writing the PRD body.
 
@@ -114,7 +167,9 @@ Required sections:
 
 If the user provides an existing PRD template/reference, follow that structure and style unless it conflicts with the requested workflow.
 
-### 7. Requirement Description Layout
+Before publishing, run a PRD self-check. If a `check-prd` skill is available, use it; otherwise check manually for source coverage, flow/prototype/text consistency, permissions, status rules, exception handling, analytics, and testable acceptance criteria.
+
+### 8. Requirement Description Layout
 
 Read `references/page-description-layout.md` when writing screen-level requirements.
 
@@ -122,7 +177,7 @@ Read `references/page-description-layout.md` when writing screen-level requireme
 - For PC pages: use a vertical layout. Screenshot on top, requirement details below.
 - Each page description should cover page goal, entry condition, displayed fields, user actions, validation, backend dependency, empty/error states, and tracking events.
 
-### 8. Feishu Writeback
+### 9. Feishu Writeback
 
 When the target is a Feishu doc/wiki:
 
@@ -130,6 +185,8 @@ When the target is a Feishu doc/wiki:
 - Only modify the document explicitly named as the target. Treat other Feishu links as read-only references unless the user explicitly says they may be changed.
 - Run screenshot redraw before this step if the PRD should use polished prototype images.
 - Upload local images with paths relative to the current working directory when using `lark-cli`; avoid absolute `--file` paths.
+- Prefer an outline/block-id read before editing an existing Feishu document; choose append, overwrite, or block-level replacement deliberately.
+- Confirm before high-impact writeback, especially when replacing existing PRD content, inserting multiple images, or updating whiteboards.
 - If the CLI cannot access credentials in the current environment, prepare a self-contained script and tell the user exactly what it will modify.
 
 ## Output Quality Checklist
@@ -137,8 +194,11 @@ When the target is a Feishu doc/wiki:
 Before finalizing:
 
 - The PRD reflects one clear product方案 unless the user explicitly asks for alternatives.
+- Source inventory identifies the write target and read-only references.
+- Requirement brief, page/state inventory, prototype, flowchart, and PRD text agree with each other.
 - The flowchart matches the described screens and state transitions.
 - Requirement descriptions match the screenshots/prototype.
+- Status machine and permission matrix are explicit when behavior varies by status or role.
 - Redrawn prototype images preserve the original interaction and do not introduce unapproved requirements.
 - Roles and permissions are explicit.
 - Analytics events map to key user actions and business states.

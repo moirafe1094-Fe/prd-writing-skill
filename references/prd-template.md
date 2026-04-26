@@ -12,7 +12,19 @@ Cover:
 - Expected business outcome.
 - Success metrics when available.
 
-## 2. Goals, Scope, And Non-Goals
+## 2. Source Materials And Decisions
+
+Use this when the PRD is assembled from Feishu references, demos, screenshots, or prior drafts.
+
+| Type | Content | Rule |
+| --- | --- | --- |
+| Write target | The document/wiki/page to update | Only this document may be modified |
+| Read-only references | Background docs, PRD examples, flowcharts, data tables | Do not modify unless user explicitly says so |
+| Prototype assets | HTML demos, screenshots, image2 drafts, redrawn images | Keep mapping to requirement sections |
+| Decisions | Confirmed product decisions | Treat as PRD facts |
+| Assumptions/open questions | Unresolved items | Label clearly and do not present as final facts |
+
+## 3. Goals, Scope, And Non-Goals
 
 Use a table:
 
@@ -23,7 +35,7 @@ Use a table:
 | Out of scope | What this PRD will not solve |
 | Dependencies | External systems, upstream data, policy, finance, legal, or ops dependencies |
 
-## 3. Roles And Permissions
+## 4. Roles And Permissions
 
 Include:
 
@@ -34,7 +46,12 @@ Include:
 - Forbidden actions.
 - Audit log requirements when actions affect money, inventory, task status, contracts, approvals, or customer data.
 
-## 4. Business Process Flowchart
+Recommended table:
+
+| Role | Entry point | Viewable data | Allowed actions | Forbidden actions | Audit requirement |
+| --- | --- | --- | --- | --- | --- |
+
+## 5. Business Process Flowchart
 
 Use a flowchart to show:
 
@@ -45,7 +62,14 @@ Use a flowchart to show:
 
 For Feishu PRDs, prefer a whiteboard over plain Mermaid text in the final doc.
 
-## 5. Requirement Description
+## 6. Page And State Inventory
+
+Write this before detailed page requirements.
+
+| Page/module | Actor | Entry condition | Core action | Key state | Exception state |
+| --- | --- | --- | --- | --- | --- |
+
+## 7. Requirement Description
 
 For each page/module:
 
@@ -60,7 +84,7 @@ For each page/module:
 - Empty, loading, disabled, failed, expired, and repeated-submit states.
 - Tracking events.
 
-## 6. Status And Rules
+## 8. Status And Rules
 
 Add when behavior depends on status.
 
@@ -69,7 +93,7 @@ Recommended table:
 | Status | Definition | Entry condition | User/system action | Next status |
 | --- | --- | --- | --- | --- |
 
-## 7. Interfaces, Fields, And Data
+## 9. Interfaces, Fields, And Data
 
 Include only when useful for execution:
 
@@ -81,16 +105,21 @@ Include only when useful for execution:
 - Idempotency and retry rules.
 - Data ownership and source of truth.
 
-## 8. Analytics Events
+Recommended field table:
+
+| Field | Meaning | Source of truth | Required | Validation/display rule |
+| --- | --- | --- | --- | --- |
+
+## 10. Analytics Events
 
 Recommended table:
 
-| Event | Trigger | Properties | Purpose |
-| --- | --- | --- | --- |
+| Event | Trigger | Properties | Purpose | QA check |
+| --- | --- | --- | --- | --- |
 
 Properties commonly include user_id, role, page_id, task_id, store_id, status, amount, result, failure_reason, and source.
 
-## 9. Risk And Exception Handling
+## 11. Risk And Exception Handling
 
 Cover:
 
@@ -101,7 +130,7 @@ Cover:
 - Privacy and sensitive data handling.
 - Manual review or fallback path.
 
-## 10. Acceptance Checklist
+## 12. Acceptance Checklist
 
 Write as testable statements:
 
@@ -111,3 +140,4 @@ Write as testable statements:
 - Status and data updates are idempotent.
 - Analytics fire at required points.
 - Flowchart, prototype, and PRD text are consistent.
+- The target Feishu document was the only modified reference.
