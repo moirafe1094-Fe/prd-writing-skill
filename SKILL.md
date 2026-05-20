@@ -140,7 +140,8 @@ Read `references/page-description-layout.md` for how first-pass visuals, HTML sc
 
 Create the business artifacts before or during PRD writing.
 
-- Business flowchart: use Mermaid for draft logic; when writing to Feishu and the PRD needs a process diagram, insert a Feishu whiteboard and write the flowchart there.
+- Business flowchart: split complex workflows into small scenario-level diagrams instead of one combined mega-flow. Separate by business scenario, product type, actor path, lifecycle stage, or state transition when branches would otherwise mix together. Use the user's actual business terms; do not reuse example labels unless they appear in the source materials.
+- Feishu process diagrams: prefer Feishu-compatible PlantUML swimlane activity diagrams for final PRD presentation when the flow is approval-heavy. Keep each diagram to one scenario with one start, one end, clear swimlanes, and only the exception paths needed for that scenario. Avoid nested multi-scenario diagrams that combine unrelated create/close, submit/review, approve/reject, timeout, vacancy, resignation, or fallback rules in one chart.
 - Roles and permissions matrix: role, entry point, viewable data, allowed action, forbidden action, audit requirement.
 - Status machine: status definition, entry condition, trigger action, next status, exception/fallback.
 - Field/data dictionary: field name, meaning, source of truth, required/optional, validation, display rule.
@@ -196,7 +197,8 @@ Before finalizing:
 - The PRD reflects one clear product方案 unless the user explicitly asks for alternatives.
 - Source inventory identifies the write target and read-only references.
 - Requirement brief, page/state inventory, prototype, flowchart, and PRD text agree with each other.
-- The flowchart matches the described screens and state transitions.
+- Flowcharts are split into small scenario-level diagrams when a combined chart would mix unrelated branches or become hard to read.
+- Each flowchart matches the described screens and state transitions for its scenario.
 - Requirement descriptions match the screenshots/prototype.
 - Status machine and permission matrix are explicit when behavior varies by status or role.
 - Redrawn prototype images preserve the original interaction and do not introduce unapproved requirements.
