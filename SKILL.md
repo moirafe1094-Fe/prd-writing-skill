@@ -141,6 +141,7 @@ Read `references/page-description-layout.md` for how first-pass visuals, HTML sc
 Create the business artifacts before or during PRD writing.
 
 - Business flowchart: split complex workflows into small scenario-level diagrams instead of one combined mega-flow. Separate by business scenario, product type, actor path, lifecycle stage, or state transition when branches would otherwise mix together. Use the user's actual business terms; do not reuse example labels unless they appear in the source materials.
+- Feishu PRD product/business flowcharts must be inserted as Feishu whiteboard blocks, not left as raw Mermaid, PlantUML, SVG source, screenshots, or code blocks. Simple flows may use `<whiteboard type="svg">`, `<whiteboard type="mermaid">`, or `<whiteboard type="plantuml">`; complex flows use a blank whiteboard plus `lark-whiteboard`. Never leave `<pre lang="mermaid">` or similar source code as the final flowchart presentation in Feishu.
 - Feishu process diagrams: prefer Feishu-compatible PlantUML swimlane activity diagrams for final PRD presentation when the flow is approval-heavy. Keep each diagram to one scenario with one start, one end, clear swimlanes, and only the exception paths needed for that scenario. Avoid nested multi-scenario diagrams that combine unrelated create/close, submit/review, approve/reject, timeout, vacancy, resignation, or fallback rules in one chart.
 - Roles and permissions matrix: role, entry point, viewable data, allowed action, forbidden action, audit requirement.
 - Status machine: status definition, entry condition, trigger action, next status, exception/fallback.
@@ -174,6 +175,8 @@ Before publishing, run a PRD self-check. If a `check-prd` skill is available, us
 
 Read `references/page-description-layout.md` when writing screen-level requirements.
 
+- When an HTML prototype exists, the Feishu PRD functional requirements section must include the HTML prototype file itself near the section start. Prefer a standalone single-file HTML attachment when the original prototype depends on separate CSS/JS/assets; otherwise attach the original HTML file. Use `docs +media-insert --type file` and move the attachment block into the functional requirements section if the insert command appends it elsewhere.
+- Requirement description sections must use a one-to-one screenshot-to-requirement layout when an HTML prototype exists: each requirement item starts with the matching HTML screenshot, followed immediately by its own requirement description. Do not batch all screenshots first and place descriptions elsewhere.
 - For app or mini-program screens: use a two-column layout. Left side is the prototype screenshot, right side is requirement details.
 - For PC pages: use a vertical layout. Screenshot on top, requirement details below.
 - Each page description should cover page goal, entry condition, displayed fields, user actions, validation, backend dependency, empty/error states, and tracking events.

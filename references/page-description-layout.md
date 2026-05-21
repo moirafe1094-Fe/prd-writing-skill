@@ -10,6 +10,22 @@ During PRD work there may be three image layers:
 
 Use the HTML demo as the source of truth for interactions. Use final redrawn images for PRD presentation only when they preserve the HTML demo's fields, states, and flow. Keep a simple mapping in working notes or artifact manifests: `requirement -> first-pass image -> HTML screen -> final PRD image`.
 
+## HTML Prototype Attachment
+
+When an HTML prototype exists, include the HTML file in the Feishu PRD functional requirements section, near the section introduction and before the screenshot/requirement pairs. Prefer a standalone single-file HTML attachment when the prototype depends on separate CSS, JavaScript, or local assets; otherwise attach the original HTML file.
+
+For Feishu writeback, use `docs +media-insert --type file` to upload the HTML file. If the command appends the file to the document end, move the attachment block into the functional requirements section so reviewers can find it before reading the detailed requirements.
+
+## One-To-One Requirement Layout
+
+When an HTML prototype or verified interactive demo exists, the requirement description section must be written as paired units:
+
+1. Place the exact HTML screenshot for one requirement or state.
+2. Immediately below or beside it, write the requirement description for that same screenshot only.
+3. Repeat the pair for the next requirement or state.
+
+Do not group all screenshots together and describe them later. Do not describe several unrelated screenshots in one generic table. Each screenshot should have a caption that includes the requirement number or state name, and the text next to it should cover only the fields, actions, validation, exceptions, dependencies, and tracking events visible or implied by that screenshot.
+
 ## App Or Mini-Program
 
 Use two columns:
