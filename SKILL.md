@@ -13,9 +13,9 @@ Run the workflow in this order:
 2. Clarify requirements with Superpowers `using-superpowers` + `brainstorming`, or a local brainstorming pass if Superpowers is unavailable.
 3. Produce a requirement brief and get alignment before design-heavy work.
 4. Create a page/state inventory before image generation so visual work does not invent workflow coverage.
-5. Generate a first-pass visual prototype with image2/imagegen from the clarified product description.
+5. Generate a first-pass visual prototype with imagegen from the clarified product description.
 6. Build, read, or refine an interactive HTML demo based on that visual prototype to validate real interactions.
-7. Verify the demo flow, capture key screens, and optionally redraw them with image2/imagegen for a cleaner PRD presentation.
+7. Verify the demo flow, capture key screens, and optionally redraw them with imagegen for a cleaner PRD presentation.
 8. Prepare business artifacts: flowchart, status machine, roles/permissions, fields/data dependencies, session/concurrency handling, analytics, and acceptance checks.
 9. Write the PRD with the user's PRD template, self-check it, then update only the explicitly targeted document.
 
@@ -29,7 +29,7 @@ Before brainstorming or editing, list the available inputs and classify each ite
 
 - Target document: the one document/wiki/page that may be modified.
 - Read-only references: Feishu docs, PRD examples, flowcharts, meeting notes, screenshots, HTML demos, data tables, API docs, or prior drafts.
-- Prototype assets: current HTML files, screenshots, image2 drafts, redrawn images, and generated artifacts.
+- Prototype assets: current HTML files, screenshots, imagegen drafts, redrawn images, and generated artifacts.
 - External systems: CRM, payment, inventory, approval, messaging, data warehouse, or manual operations.
 - Constraints: deadline, platform, brand/design system, compliance, money/data risk, and permission boundaries.
 
@@ -51,7 +51,7 @@ Clarify these points before writing:
 - Permissions, state changes, money/data/compliance risks, and audit needs.
 - Whether Session mechanism handling is involved. Clarify login/session identity, session expiration, refresh/renewal, cross-device behavior, account switching, logout/invalid session handling, and whether the PRD should explicitly state "not involved".
 - Whether concurrency scenarios are involved. Clarify repeated submit, simultaneous edits/actions, multi-user approval or task processing, inventory/quota/money/status updates, idempotency, locking, conflict resolution, retry, and whether the PRD should explicitly state "not involved".
-- Menu and core behavior tracking. Identify menu exposure/click and core action events, define PV and UV counting requirements, and map each event to the required analytics Data design fields: employeeId, role, businessGroup, actionType, targetObjectType, targetObject, currentPosition, userId, and content.
+- Menu and core behavior tracking. Identify menu exposure/click and core action events, define PV and UV counting requirements, and map each event to the required analytics table fields: 埋点ID, 事件名（event_name）, 事件名, 端, 模块/页面, 触发时机, 角色, 属性清单, 属性说明, and 状态.
 - Open questions that block implementation versus details that can be assumed.
 
 Output a short requirement brief before visual or HTML work:
@@ -63,7 +63,7 @@ Output a short requirement brief before visual or HTML work:
 - Main success path and important exception paths.
 - Session mechanism decision: involved or not involved, with key rules or open questions.
 - Concurrency scenario decision: involved or not involved, with key rules or open questions.
-- Tracking scope: menus and core behaviors that must record PV and UV, with preliminary actionType, targetObjectType, targetObject, currentPosition, and content values.
+- Tracking scope: menus and core behaviors that must record PV and UV, with preliminary event_name, platform, module/page, trigger timing, role, properties, property descriptions, and lifecycle status.
 - Key assumptions and open questions.
 - Proposed next artifact: image prototype, HTML demo, PRD outline, or Feishu writeback.
 
@@ -91,7 +91,7 @@ For workflows driven by task/order/payment/approval status, create a status tabl
 
 ### 3. First-Pass Visual Prototype
 
-After the requirement brief and page/state inventory, use image2/imagegen or an equivalent image generation capability to create a first-pass static prototype from the clarified product description.
+After the requirement brief and page/state inventory, use imagegen to create a first-pass static prototype from the clarified product description. If imagegen is unavailable, stop and tell the user instead of silently substituting another generator.
 
 Use this node to:
 
@@ -127,7 +127,7 @@ Validate the demo with a compact interaction matrix:
 
 Before final Feishu writeback, decide whether the prototype screenshots should be redrawn.
 
-Use image2/imagegen or an equivalent image generation/editing capability when:
+Use imagegen when:
 
 - The prototype screenshot is visually rough but the interaction is already clear.
 - The PRD needs cleaner, more consistent app/mini-program/PC visuals.
@@ -155,7 +155,7 @@ Create the business artifacts before or during PRD writing.
 - Session handling: state whether Session is involved. If involved, define session identity, validity/expiration, renewal, logout/invalid-session behavior, account switching, cross-device behavior, and affected pages/actions. If not involved, record that decision explicitly when it was part of clarification.
 - Concurrency handling: state whether concurrency is involved. If involved, define duplicate submission prevention, idempotency, locking or optimistic conflict rules, retry behavior, status/data consistency, and user-visible conflict/error handling. If not involved, record that decision explicitly when it was part of clarification.
 - Field/data dictionary: field name, meaning, source of truth, required/optional, validation, display rule.
-- Analytics plan: output `Data设计`, `字段枚举`, and the analytics event table. The event table must use these columns: 名称, 发起方, 动作类型, 目标对象类型, 目标对象标识, 发生位置, 内容信息, 备注. Use action_type and target_object_type enum values, and put PV/UV counting notes, deduplication key, or special collection rules in 备注.
+- Analytics plan: output the analytics event table with exactly these columns: 埋点ID, 事件名（event_name）, 事件名, 端, 模块/页面, 触发时机, 角色, 属性清单, 属性说明, 状态. Do not use the previous Data设计/字段枚举 block or the old 名称/发起方/动作类型 table. Put PV/UV counting rules, UV deduplication key, and special collection rules in 属性清单 and 属性说明.
 
 Use product language in labels, not implementation jargon.
 
@@ -179,7 +179,7 @@ Required sections:
 
 If the user provides an existing PRD template/reference, follow that structure and style unless it conflicts with the requested workflow.
 
-Before publishing, run a PRD self-check. If a `check-prd` skill is available, use it; otherwise check manually for source coverage, flow/prototype/text consistency, permissions, status rules, session/concurrency handling, exception handling, required analytics Data design/table format, PV/UV analytics, and testable acceptance criteria.
+Before publishing, run a PRD self-check. If a `check-prd` skill is available, use it; otherwise check manually for source coverage, flow/prototype/text consistency, permissions, status rules, session/concurrency handling, exception handling, required analytics table format, PV/UV analytics, and testable acceptance criteria.
 
 ### 8. Requirement Description Layout
 
@@ -217,6 +217,6 @@ Before finalizing:
 - Session involvement and concurrency involvement are explicitly answered, with rules documented when involved.
 - Redrawn prototype images preserve the original interaction and do not introduce unapproved requirements.
 - Roles and permissions are explicit.
-- Analytics events map to menu exposure/click, core user actions, and business states, with PV and UV counting rules, required Data design fields, action_type enum values, target_object_type enum values, and the required table columns.
+- Analytics events map to menu exposure/click, core user actions, and business states, with PV and UV counting rules, required event_name naming, platform/module/trigger/role coverage, property list, property descriptions, lifecycle status, and the required table columns.
 - Acceptance criteria are testable.
 - Reference documents were not modified accidentally.

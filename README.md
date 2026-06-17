@@ -7,7 +7,7 @@ It is designed for product managers and builders who want a repeatable workflow:
 1. Inventory source materials and protect the single target document.
 2. Clarify requirements with Superpowers `using-superpowers` and `brainstorming`.
 3. Create a requirement brief plus page/state inventory.
-4. Generate a first-pass visual prototype with image2/imagegen.
+4. Generate a first-pass visual prototype with imagegen.
 5. Build or inspect an interactive HTML demo to validate real interactions.
 6. Capture demo screens and optionally redraw them for cleaner PRD presentation.
 7. Write and self-check the final PRD with business background, roles, permissions, process flow, requirement descriptions, analytics events, and acceptance criteria.
@@ -46,7 +46,7 @@ This keeps visual prototypes from inventing business coverage and makes the late
 
 ### 3. First-Pass Visual Prototype
 
-After clarification, the skill can use image2/imagegen to generate static visual prototypes from the product description.
+After clarification, the skill uses imagegen to generate static visual prototypes from the product description.
 
 This step helps align page hierarchy, product feel, and workflow coverage before building an interactive demo.
 
@@ -67,7 +67,7 @@ It validates the demo with a compact screen-action-result matrix before screensh
 
 ### 5. PRD Screenshots
 
-Before writing the final PRD, screenshots from the interactive demo can be redrawn with image2/imagegen for a cleaner presentation.
+Before writing the final PRD, screenshots from the interactive demo can be redrawn with imagegen for a cleaner presentation.
 
 The redraw step must preserve the original interaction, fields, wording, page states, and information hierarchy. It should not invent new requirements.
 
