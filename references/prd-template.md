@@ -112,12 +112,27 @@ Recommended field table:
 
 ## 10. Analytics Events
 
-Recommended table:
+Use this output structure for the analytics section. Do not replace it with a generic Event/Trigger/Properties table, the previous Data设计/字段枚举 block, or the old 名称/发起方/动作类型 table.
 
-| Event | Trigger | Properties | Purpose | QA check |
-| --- | --- | --- | --- | --- |
+| 埋点ID | 事件名（event_name） | 事件名 | 端 | 模块/页面 | 触发时机 | 角色 | 属性清单 | 属性说明 | 状态 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 唯一编号 | 英文 snake_case，全局唯一 | 业务可读名称 | Android/iOS/PC/H5/小程序/后台 | 页面或功能模块 | 何时上报（精确到动作） | 触发用户角色 | 键值对清单 | 每个属性的类型、含义、枚举 | 点位生命周期状态 |
+| TRK-REQ-001-001 | order_submit_click | 提交订单按钮点击 | 造旺App、造旺PC | 订单确认页 | 用户点击「提交订单」且校验通过后 | 合伙人、区域经理 | order_id, amount, sku_count | amount: number，单位元 | 待评审/已评审/开发中/已上线/已废弃 |
 
-Properties commonly include user_id, role, page_id, task_id, store_id, status, amount, result, failure_reason, and source.
+Table rules:
+
+- 埋点ID: use a globally unique tracking point id, such as `TRK-REQ-001-001`. Keep numbering stable after review.
+- 事件名（event_name）: use English `snake_case`; keep it globally unique and stable for implementation.
+- 事件名: write a business-readable Chinese event name.
+- 端: list every applicable terminal, such as Android, iOS, PC, H5, 小程序, 后台, or specific app names.
+- 模块/页面: write the page or functional module where the event happens.
+- 触发时机: state exactly when the event is reported, precise to the user/system action and validation condition.
+- 角色: list the triggering user role.
+- 属性清单: list property keys as a comma-separated key list. Include PV/UV-related identity or counting properties when needed.
+- 属性说明: explain each property's type, meaning, unit, enum, and UV deduplication rule when relevant.
+- 状态: use lifecycle statuses such as 待评审, 已评审, 开发中, 已上线, or 已废弃.
+
+The analytics plan must include menu exposure/click events and core behavior events. Each event should state PV/UV collection requirements through 属性清单 and 属性说明. UV commonly deduplicates by employeeId, userId, device_id, or another agreed identity within the selected time window.
 
 ## 11. Risk And Exception Handling
 
@@ -138,6 +153,6 @@ Write as testable statements:
 - Each role sees only permitted data/actions.
 - Each exception state has a visible and recoverable behavior.
 - Status and data updates are idempotent.
-- Analytics fire at required points.
+- Menu and core behavior analytics use the required table columns, event_name naming, property list, property descriptions, lifecycle status, and fire at required points with PV and UV counting rules verified.
 - Flowchart, prototype, and PRD text are consistent.
 - The target Feishu document was the only modified reference.
