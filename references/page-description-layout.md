@@ -46,13 +46,13 @@ If screenshots were redrawn with image2/imagegen, use the redrawn images in the 
 
 Use vertical layout:
 
-1. Screenshot first.
+1. Full-page overview screenshot first.
 2. Requirement details below.
 
 Recommended structure:
 
 ```xml
-<img src="IMAGE_TOKEN" width="900" caption="PC页面截图" name="pc-screen.png"/>
+<img src="IMAGE_TOKEN" width="900" caption="PC完整页面截图" name="pc-full-page.png"/>
 <p><b>页面目标：</b>...</p>
 <table>
   <thead>
@@ -66,6 +66,8 @@ Recommended structure:
 ```
 
 PC pages usually need module-level breakdown because one screen may contain navigation, filters, table, drawer, modal, and batch actions.
+
+For long PC/admin pages, the first screenshot must be a full-page or stitched overview. It must include the page top boundary, left/top navigation if present, breadcrumbs or tabs, every business section in order, lower tables or timelines, and the bottom footer or sticky action buttons. A viewport-only screenshot that stops before the lower modules is incomplete. After the overview, add focused crops for modules whose details are too small to read in the full-page image.
 
 If a PC prototype is redrawn, keep the same viewport, module order, labels, table columns, filters, and primary/secondary actions as the original. Do not beautify by removing dense operational information.
 

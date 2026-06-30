@@ -115,7 +115,7 @@ Build, read, or refine an interactive HTML demo before writing the PRD.
 - For screenshots, map every screenshot to a page state and interaction step.
 - For a new prototype request, create a concise demo that exposes the real workflow, not a marketing page.
 - Add enough interaction to validate navigation, branching, state transitions, and major exception paths.
-- Capture key screens for the PRD. Prefer actual prototype screenshots when available.
+- Capture key screens for the PRD. Prefer actual prototype screenshots when available. For long PC/admin pages, capture a full-page overview before module crops.
 - List screen inventory, user actions, state transitions, empty/error states, and backend dependencies.
 
 Validate the demo with a compact interaction matrix:
@@ -213,6 +213,7 @@ Before finalizing:
 - Flowcharts are split into small scenario-level diagrams when a combined chart would mix unrelated branches or become hard to read.
 - Each flowchart matches the described screens and state transitions for its scenario.
 - Requirement descriptions match the screenshots/prototype.
+- UI-driven PRDs include a true full-page overview screenshot, not only the visible viewport or top half of the page.
 - Status machine and permission matrix are explicit when behavior varies by status or role.
 - Session involvement and concurrency involvement are explicitly answered, with rules documented when involved.
 - Redrawn prototype images preserve the original interaction and do not introduce unapproved requirements.
@@ -229,6 +230,9 @@ Required capture pattern:
 
 1. Start with one complete UI overview screenshot.
    - Capture the whole relevant screen, canvas, or full design frame first.
+   - For a long PC/admin page, "complete" means the stitched/full-page capture includes the top navigation or breadcrumb, tabs, all visible business modules in vertical order, tables/cards/forms/timelines, and the final footer or sticky action bar. It must show the page from top boundary to bottom boundary.
+   - Do not treat a browser viewport screenshot, first screen, hero area, or cropped top half as the complete overview when more content exists below the fold.
+   - If the page scrolls vertically, use full-page browser capture or stitch sequential screenshots; verify the bottom-most page content and final action buttons are visible.
    - Place this overview before the detailed module analysis so readers can build spatial context.
    - Label it clearly, for example: "Overall UI reference" or "Full-page UI overview".
 
@@ -253,6 +257,7 @@ Quality bar:
 - Screenshots should be sharp enough that important text and controls are legible.
 - Avoid vague captions such as "screenshot above"; name the UI area and explain why it matters.
 - For long pages or complex canvases, use one complete stitched/full-page view when possible, then separate crops for each key section.
+- Reject incomplete overview captures: missing bottom action bars, missing lower sections such as approval/signoff timelines, cut-off tables, absent side navigation, or screenshots that stop mid-page are not acceptable as "complete page screenshots".
 
 Recommended Feishu PRD layout for UI-driven requirements:
 
