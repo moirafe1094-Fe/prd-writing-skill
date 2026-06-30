@@ -220,3 +220,50 @@ Before finalizing:
 - Analytics events map to menu exposure/click, core user actions, and business states, with PV and UV counting rules, required event_name naming, platform/module/trigger/role coverage, property list, property descriptions, lifecycle status, and the required table columns.
 - Acceptance criteria are testable.
 - Reference documents were not modified accidentally.
+
+## UI Screenshot Evidence Standard
+
+When the PRD is based on an existing UI design, screenshot, prototype, or visual reference, treat screenshots as structured product evidence rather than decoration.
+
+Required capture pattern:
+
+1. Start with one complete UI overview screenshot.
+   - Capture the whole relevant screen, canvas, or full design frame first.
+   - Place this overview before the detailed module analysis so readers can build spatial context.
+   - Label it clearly, for example: "Overall UI reference" or "Full-page UI overview".
+
+2. Follow with focused screenshots for each important area.
+   - Crop or capture each specific module, interaction area, state, table, form, card, navigation region, or empty/loading/error state that the PRD discusses.
+   - Each focused screenshot must be placed immediately next to the requirement text it supports.
+   - Do not rely on a single full-screen capture when the requirement depends on visual details that are hard to inspect at full scale.
+
+3. Describe each focused screenshot in product terms.
+   - Explain what the user sees, what the component is for, what data or state it represents, and what behavior is implied.
+   - Call out visible controls, labels, hierarchy, status indicators, default values, validation hints, and action affordances.
+   - Connect the visual evidence to requirements, acceptance criteria, and edge cases.
+
+4. Preserve visual traceability.
+   - Use stable screenshot labels such as "Figure 1: Full UI overview", "Figure 2: Filter panel", and "Figure 3: Result card details".
+   - Reference those labels from the corresponding requirement sections.
+   - If multiple states exist, capture them separately instead of describing invisible state changes from memory.
+
+Quality bar:
+
+- A reader who has never seen the source UI should understand the full layout from the overview screenshot and the behavior of each key area from the focused screenshots.
+- Screenshots should be sharp enough that important text and controls are legible.
+- Avoid vague captions such as "screenshot above"; name the UI area and explain why it matters.
+- For long pages or complex canvases, use one complete stitched/full-page view when possible, then separate crops for each key section.
+
+Recommended Feishu PRD layout for UI-driven requirements:
+
+1. At the start of the functional requirements section, attach the HTML/prototype file when one exists, then explain that screenshots are taken from that prototype or UI draft.
+2. Add a dedicated overview subsection before module details, for example "6.0 整体 UI 稿".
+   - Insert the complete UI screenshot in this subsection.
+   - Explain which areas are changed in this requirement and which existing areas remain unchanged.
+3. For each subsequent module subsection, use this order:
+   - Focused screenshot for the module or state.
+   - A short "页面目标" paragraph that explains the user's review/operation goal and why this module matters.
+   - A requirement table with three columns: "模块/指标卡/字段", "需求说明", and "规则/异常".
+4. In the table, separate display requirements from calculation rules, data-source rules, empty-state rules, and read-only/editability rules.
+5. When an interaction is visible in the screenshot, such as click-to-preview, hover tooltip, sticky alert, disabled action, status dot, or empty placeholder, write it as an explicit requirement and add the exception behavior in the "规则/异常" column.
+6. For metric modules, include formula, numerator/denominator, zero-value behavior, threshold behavior, and whether the field is only for display or can be manually edited.
