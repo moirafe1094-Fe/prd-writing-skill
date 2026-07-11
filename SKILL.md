@@ -21,6 +21,17 @@ Run the workflow in this order:
 
 Do not jump straight into PRD writing when the product path is still blurry.
 
+## Writing Style: Direct And Concise
+
+Keep the original PRD structure and requirement coverage, but write only information that changes product understanding, implementation, testing, or decision-making.
+
+- Start sections with the business fact or requirement. Do not narrate how the document is organized, how readers should review it, or why a screenshot is placed there.
+- Omit meta prose such as “本 PRD 以 HTML 原型为依据”“文档先放完整页面总览”“便于评审确认页面结构” when the attachment, screenshot, caption, and following requirement already make that relationship obvious.
+- Do not announce the next section, summarize the previous section, or explain that a table/screenshot “用于说明” content that is already visible.
+- Prefer one direct sentence over a setup paragraph. Example: use “PC 端交互以随附 HTML 原型为准。” only when the source-of-truth relationship must be explicit; otherwise omit it.
+- Avoid stiff template language such as “对应需求如下”“用户可通过该功能实现”“系统将会进行”. Use direct product language: “支持…”, “点击后…”, “校验失败时…”.
+- After drafting, delete any sentence whose removal does not change scope, rule, interaction, data, exception, or acceptance meaning.
+
 ## Workflow
 
 ### 0. Source Inventory And Target Safety
@@ -38,6 +49,14 @@ If there is any ambiguity about which Feishu document may be edited, stop and as
 ### 1. Requirement Brainstorming
 
 If Superpowers is installed, first use `using-superpowers`, then use `brainstorming` for requirement clarification and prototype design. If those skills are unavailable, run a compact brainstorming pass yourself.
+
+Use MECE when asking questions:
+
+- Organize unknowns into non-overlapping domains: business goal and success, users and permissions, scope and non-goals, end-to-end process and states, business rules and calculations, data/interfaces and source of truth, exceptions/non-functional risks, and delivery/acceptance.
+- Assign each question to exactly one domain. Do not ask the same decision again with different wording in another domain.
+- Within a question, choices must be mutually exclusive and collectively cover the plausible decision space. Include “不涉及/保持现状” or “暂不确定” when either is a legitimate outcome; use free-form follow-up only when fixed choices cannot cover the answer.
+- Ask only about information not already established by source materials or earlier answers. Keep a compact domain checklist of `confirmed / not involved / open` so no domain is accidentally skipped.
+- Ask one decision at a time unless two facts are inseparable. Finish blocking questions first; non-blocking details may be recorded as assumptions.
 
 Clarify these points before writing:
 
@@ -110,6 +129,15 @@ Rules:
 
 Build, read, or refine an interactive HTML demo before writing the PRD.
 
+When the requirement covers both PC and APP:
+
+- Create two independent, self-contained HTML files: one PC prototype and one APP prototype.
+- The PC HTML contains only PC pages, navigation, states, and interactions. The APP HTML contains only APP pages, states, and interactions.
+- Do not embed APP screens or APP walkthrough content inside the PC HTML, and do not place APP content above the PC prototype as part of one combined file.
+- Validate and capture the two prototypes separately. Maintain separate PC and APP screen inventories even when both implement the same business rule.
+- In the Feishu PRD prototype attachment area, use a two-column layout: PC title, attachment, and short description in the left column; APP title, attachment, and short description in the right column.
+- Both columns must contain real uploaded HTML attachment blocks, not filenames, placeholders, raw links, or a single combined attachment.
+
 - Base the HTML demo on the approved first-pass visual prototype.
 - For an existing HTML prototype, inspect the DOM, screens, state variables, event handlers, and navigation paths.
 - For screenshots, map every screenshot to a page state and interaction step.
@@ -147,6 +175,11 @@ Read `references/page-description-layout.md` for how first-pass visuals, HTML sc
 
 Create the business artifacts before or during PRD writing.
 
+- Requirement size: classify the request before creating artifacts. Small means a localized change with at most two user-visible pages/states, one main actor path, and no meaningful cross-system or multi-source aggregation. Medium means three to six pages/states, multiple roles or branches, or one cross-system/multi-source dependency. Large means seven or more pages/states, multiple systems/roles, substantial state lifecycle, allocation/calculation, financial/data risk, or several cross-cutting dependencies. When signals conflict, use the larger size.
+- Business architecture diagram: mandatory for every medium or large requirement; optional for small requirements. It is separate from the business flowchart and cannot be replaced by one. Show the stable structure of the solution: input/data sources or upstream channels, rule/calculation/import paths, merge or aggregation logic, core management/capability layer, downstream allocation/application/query/audit outputs, and the important ownership or bypass boundaries. Use the user's business terms and show formulas or composition relationships when they define the architecture.
+- Architecture diagram quality: follow the visual grammar of the provided reference—group parallel sources into clearly bounded regions, use directional connectors into merge/summary layers, distinguish core results from downstream views, and label exceptional bypass paths. Do not produce a generic technical stack diagram unless the requirement is actually about infrastructure.
+- Feishu architecture diagrams must be inserted as a native whiteboard block, not as raw code or an external screenshot. After insertion, export or preview the whiteboard and verify legibility, connector direction, grouping, and that no label is clipped or overlapping.
+
 - Business flowchart: split complex workflows into small scenario-level diagrams instead of one combined mega-flow. Separate by business scenario, product type, actor path, lifecycle stage, or state transition when branches would otherwise mix together. Use the user's actual business terms; do not reuse example labels unless they appear in the source materials.
 - Feishu PRD product/business flowcharts must be inserted as Feishu whiteboard blocks, not left as raw Mermaid, PlantUML, SVG source, screenshots, or code blocks. Simple flows may use `<whiteboard type="svg">`, `<whiteboard type="mermaid">`, or `<whiteboard type="plantuml">`; complex flows use a blank whiteboard plus `lark-whiteboard`. Never leave `<pre lang="mermaid">` or similar source code as the final flowchart presentation in Feishu.
 - Feishu process diagrams: prefer Feishu-compatible PlantUML swimlane activity diagrams for final PRD presentation when the flow is approval-heavy. Keep each diagram to one scenario with one start, one end, clear swimlanes, and only the exception paths needed for that scenario. Avoid nested multi-scenario diagrams that combine unrelated create/close, submit/review, approve/reject, timeout, vacancy, resignation, or fallback rules in one chart.
@@ -169,6 +202,7 @@ Required sections:
 - Scope and non-goals.
 - Roles and permissions.
 - Business process flowchart.
+- Business architecture diagram for medium and large requirements.
 - Requirement description.
 - State machine or status rules when status affects behavior.
 - Data, interface, or field requirements when needed.
@@ -184,6 +218,12 @@ Before publishing, run a PRD self-check. If a `check-prd` skill is available, us
 ### 8. Requirement Description Layout
 
 Read `references/page-description-layout.md` when writing screen-level requirements.
+
+- Every distinct page or major user-visible state in Requirement Description MUST have its own matching screenshot. A prototype attachment, overview screenshot, flowchart, page inventory, or another page's screenshot does not satisfy this requirement.
+- PC page layout is mandatory vertical composition: page heading, full-width matching screenshot on top, then that page's requirement description immediately below it.
+- APP page layout is mandatory two-column composition: matching APP screenshot in the left column and that page's requirement description in the right column.
+- Do not batch screenshots into a gallery and describe pages later. Do not place multiple page descriptions under one shared screenshot unless they are explicitly states of the same visible page and all states are visible in that screenshot.
+- If a required page screenshot cannot be captured, stop before publishing and create or capture the missing state; a text placeholder is not final delivery.
 
 - When an HTML prototype exists, the Feishu PRD functional requirements section must include the HTML prototype file itself near the section start. Prefer a standalone single-file HTML attachment when the original prototype depends on separate CSS/JS/assets; otherwise attach the original HTML file. Use `docs +media-insert --type file` and move the attachment block into the functional requirements section if the insert command appends it elsewhere.
 - Requirement description sections must use a one-to-one screenshot-to-requirement layout when an HTML prototype exists: each requirement item starts with the matching HTML screenshot, followed immediately by its own requirement description. Do not batch all screenshots first and place descriptions elsewhere.
@@ -212,6 +252,8 @@ Before finalizing:
 - Requirement brief, page/state inventory, prototype, flowchart, and PRD text agree with each other.
 - Flowcharts are split into small scenario-level diagrams when a combined chart would mix unrelated branches or become hard to read.
 - Each flowchart matches the described screens and state transitions for its scenario.
+- Brainstorming questions are MECE: each decision belongs to one domain, choices do not overlap, and every relevant domain is confirmed, not involved, or explicitly open.
+- Medium and large PRDs contain a separate, legible business architecture whiteboard covering sources, processing/aggregation, core capabilities, and downstream results.
 - Requirement descriptions match the screenshots/prototype.
 - Status machine and permission matrix are explicit when behavior varies by status or role.
 - Session involvement and concurrency involvement are explicitly answered, with rules documented when involved.
@@ -220,6 +262,9 @@ Before finalizing:
 - Analytics events map to menu exposure/click, core user actions, and business states, with PV and UV counting rules, required event_name naming, platform/module/trigger/role coverage, property list, property descriptions, lifecycle status, and the required table columns.
 - Acceptance criteria are testable.
 - Reference documents were not modified accidentally.
+- The document contains no unnecessary review guidance, section narration, screenshot-placement explanation, or other meta prose.
+- A mixed PC-and-APP PRD contains two independent HTML attachments, with PC on the left and APP on the right; neither HTML contains the other terminal's screens.
+- Every Requirement Description page has a matching screenshot; PC pages use screenshot-above-description, and APP pages use screenshot-left/description-right.
 
 ## UI Screenshot Evidence Standard
 

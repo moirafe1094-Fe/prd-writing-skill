@@ -51,6 +51,10 @@ Recommended table:
 | Role | Entry point | Viewable data | Allowed actions | Forbidden actions | Audit requirement |
 | --- | --- | --- | --- | --- | --- |
 
+## Business Architecture Diagram (Required For Medium/Large)
+
+For medium and large requirements, insert a separate Feishu whiteboard showing upstream/input sources, calculation/import paths, merge or aggregation rules, core capability/management layer, downstream allocation/application/query/audit results, and any bypass or ownership boundary. This diagram explains the stable business structure; it does not replace the process flowchart.
+
 ## 5. Business Process Flowchart
 
 Use a flowchart to show:

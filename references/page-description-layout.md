@@ -10,7 +10,13 @@ During PRD work there may be three image layers:
 
 Use the HTML demo as the source of truth for interactions. Use final redrawn images for PRD presentation only when they preserve the HTML demo's fields, states, and flow. Keep a simple mapping in working notes or artifact manifests: `requirement -> first-pass image -> HTML screen -> final PRD image`.
 
+## Mixed PC And APP Prototype Attachments
+
+For a mixed PC-and-APP requirement, create and upload two independent self-contained files. Place the PC HTML attachment in the left column and the APP HTML attachment in the right column of the same prototype attachment area. Do not combine the two terminals into one HTML, do not put APP screens inside the PC file, and do not put APP content above the PC attachment. Each column contains its own title, real attachment block, and at most one short description.
+
 ## App Or Mini-Program
+
+Every APP page or major visible state in Requirement Description requires its own screenshot and uses a two-column block: screenshot on the left, matching page description on the right. The screenshot and description must share the same row/container so readers can compare them without scrolling between separate sections. An overview image or HTML attachment does not replace the page screenshot.
 
 Use two columns:
 
@@ -44,6 +50,8 @@ If screenshots were redrawn with image2/imagegen, use the redrawn images in the 
 
 ## PC Page
 
+Every PC page or major visible state in Requirement Description requires its own screenshot and uses a vertical block: page heading, matching screenshot on top, and matching page description immediately below. Do not put the description beside the screenshot, and do not reuse a general overview image as evidence for a different page.
+
 Use vertical layout:
 
 1. Screenshot first.
@@ -70,6 +78,10 @@ PC pages usually need module-level breakdown because one screen may contain navi
 If a PC prototype is redrawn, keep the same viewport, module order, labels, table columns, filters, and primary/secondary actions as the original. Do not beautify by removing dense operational information.
 
 ## Description Quality Bar
+
+- Screenshot coverage equals page/state coverage: each requirement page has one directly associated screenshot.
+- PC uses screenshot above description; APP uses screenshot left and description right.
+- Missing screenshots, filename placeholders, or text such as “页面截图待补” fail final publication.
 
 Every page/module should answer:
 
