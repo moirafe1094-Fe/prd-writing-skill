@@ -57,6 +57,15 @@ For medium and large requirements, insert a separate Feishu whiteboard showing u
 
 ## 5. Business Process Flowchart
 
+Use Feishu whiteboard-native diagrams for final PRD presentation. Read `feishu-whiteboard-flowcharts.md` before writing or inserting flowcharts.
+
+Required format:
+
+- Insert as a Feishu whiteboard block, preferably SVG whiteboard.
+- Do not leave raw Mermaid, PlantUML, SVG source, or screenshot-only diagrams in the final PRD.
+- Use role/phase swimlanes, rounded cards, arrows, status colors, and legends when the flow has multiple actors or statuses.
+- Split complex workflows into scenario-level diagrams.
+
 Use a flowchart to show:
 
 - Main success path.
@@ -64,7 +73,14 @@ Use a flowchart to show:
 - Exception handling.
 - End states.
 
-For Feishu PRDs, prefer a whiteboard over plain Mermaid text in the final doc.
+Recommended visual patterns:
+
+| Scenario | Recommended diagram |
+| --- | --- |
+| End-to-end business process | Phase-row or swimlane SVG whiteboard |
+| Approval/reject/timeout flow | Role swimlane SVG whiteboard |
+| Page/status relationship | Page/status map SVG whiteboard |
+| Cross-terminal APP/PC/backend process | Multi-column page map plus status strip |
 
 ## 6. Page And State Inventory
 
