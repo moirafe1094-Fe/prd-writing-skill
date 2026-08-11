@@ -1,6 +1,6 @@
 ---
 name: prd-write
-description: Structured product requirement writing workflow for turning ideas, Feishu docs, PRD drafts, HTML prototypes, app/mini-program/PC demos, or screenshots into a complete PRD. Use when the user asks to write, update, rewrite, review-then-write, or directly publish a PRD/需求文档/产品方案, especially when the work should first inventory source materials, clarify requirements with brainstorming or Superpowers, create a requirement brief, design page/state inventory, build or inspect a prototype demo, then write a PRD with background, roles, permissions, business flowchart, requirement description, session/concurrency handling, PV/UV analytics events, acceptance checklist, and Feishu-ready screenshots.
+description: Structured product requirement writing workflow for turning ideas, Feishu docs, PRD drafts, HTML prototypes, app/mini-program/PC demos, or screenshots into a complete PRD. Use when the user asks to write, update, rewrite, review-then-write, or directly publish a PRD/需求文档/产品方案, especially when the work should first inventory source materials, clarify requirements with brainstorming or Superpowers, create a requirement brief, design page/state inventory, build or inspect a prototype demo, then write a PRD with background, roles, permissions, business flowchart, requirement description, PV/UV analytics events, acceptance checklist, and Feishu-ready screenshots.
 ---
 
 # PRD Write
@@ -16,7 +16,7 @@ Run the workflow in this order:
 5. Generate a first-pass visual prototype with imagegen from the clarified product description.
 6. Build, read, or refine an interactive HTML demo based on that visual prototype to validate real interactions.
 7. Verify the demo flow, capture key screens, and optionally redraw them with imagegen for a cleaner PRD presentation.
-8. Prepare business artifacts: flowchart, status machine, roles/permissions, fields/data dependencies, session/concurrency handling, analytics, and acceptance checks.
+8. Prepare business artifacts: flowchart, status machine, roles/permissions, fields/data dependencies, analytics, and acceptance checks.
 9. Write the PRD with the user's PRD template, self-check it, then update only the explicitly targeted document.
 
 Do not jump straight into PRD writing when the product path is still blurry.
@@ -68,8 +68,6 @@ Clarify these points before writing:
 - Product scope: in scope, out of scope, and explicit non-goals.
 - Main success path and important exception paths.
 - Permissions, state changes, money/data/compliance risks, and audit needs.
-- Whether Session mechanism handling is involved. Clarify login/session identity, session expiration, refresh/renewal, cross-device behavior, account switching, logout/invalid session handling, and whether the PRD should explicitly state "not involved".
-- Whether concurrency scenarios are involved. Clarify repeated submit, simultaneous edits/actions, multi-user approval or task processing, inventory/quota/money/status updates, idempotency, locking, conflict resolution, retry, and whether the PRD should explicitly state "not involved".
 - Menu and core behavior tracking. Identify menu exposure/click and core action events, define PV and UV counting requirements, and map each event to the required analytics table fields: 埋点ID, 事件名（event_name）, 事件名, 端, 模块/页面, 触发时机, 角色, 属性清单, 属性说明, and 状态.
 - Open questions that block implementation versus details that can be assumed.
 
@@ -80,8 +78,6 @@ Output a short requirement brief before visual or HTML work:
 - Users/roles and permission boundaries.
 - In scope, out of scope, and explicit non-goals.
 - Main success path and important exception paths.
-- Session mechanism decision: involved or not involved, with key rules or open questions.
-- Concurrency scenario decision: involved or not involved, with key rules or open questions.
 - Tracking scope: menus and core behaviors that must record PV and UV, with preliminary event_name, platform, module/page, trigger timing, role, properties, property descriptions, and lifecycle status.
 - Key assumptions and open questions.
 - Proposed next artifact: image prototype, HTML demo, PRD outline, or Feishu writeback.
@@ -96,11 +92,10 @@ For each page or module, capture:
 
 - Platform and layout type: mini-program/app two-column PRD layout, PC vertical PRD layout, backend/admin, or mixed.
 - Entry condition and actor.
-- Session dependency, session change, or invalid-session behavior.
 - Primary user decision or action.
 - Required displayed fields and data source.
-- Actions, validation, concurrent/repeated-operation handling, and next state.
-- Empty, loading, disabled, expired, failed, repeated-submit, and permission-denied states.
+- Actions, validation, and next state.
+- Empty, loading, disabled, expired, failed, and permission-denied states.
 - Related tracking events, explicitly distinguishing menu tracking and core behavior tracking, with PV/UV requirements and the required analytics table fields.
 
 For workflows driven by task/order/payment/approval status, create a status table before writing page details:
@@ -189,8 +184,6 @@ Create the business artifacts before or during PRD writing.
 - Read `references/feishu-whiteboard-flowcharts.md` before creating or writing back Feishu PRD flowcharts.
 - Roles and permissions matrix: role, entry point, viewable data, allowed action, forbidden action, audit requirement.
 - Status machine: status definition, entry condition, trigger action, next status, exception/fallback.
-- Session handling: state whether Session is involved. If involved, define session identity, validity/expiration, renewal, logout/invalid-session behavior, account switching, cross-device behavior, and affected pages/actions. If not involved, record that decision explicitly when it was part of clarification.
-- Concurrency handling: state whether concurrency is involved. If involved, define duplicate submission prevention, idempotency, locking or optimistic conflict rules, retry behavior, status/data consistency, and user-visible conflict/error handling. If not involved, record that decision explicitly when it was part of clarification.
 - Field/data dictionary: field name, meaning, source of truth, required/optional, validation, display rule.
 - Analytics plan: output the analytics event table with exactly these columns: 埋点ID, 事件名（event_name）, 事件名, 端, 模块/页面, 触发时机, 角色, 属性清单, 属性说明, 状态. Do not use the previous Data设计/字段枚举 block or the old 名称/发起方/动作类型 table. Put PV/UV counting rules, UV deduplication key, and special collection rules in 属性清单 and 属性说明.
 
@@ -210,14 +203,13 @@ Required sections:
 - Requirement description.
 - State machine or status rules when status affects behavior.
 - Data, interface, or field requirements when needed.
-- Session mechanism handling and concurrency scenario handling. Include an explicit "not involved" conclusion when these were checked and ruled out.
 - Analytics and event tracking, including menu and core behavior events that record PV and UV. Use the required table format from `references/prd-template.md`, not a generic Event/Trigger/Properties table.
 - Risk, exception, and compliance handling.
 - Acceptance checklist.
 
 If the user provides an existing PRD template/reference, follow that structure and style unless it conflicts with the requested workflow.
 
-Before publishing, run a PRD self-check. If a `check-prd` skill is available, use it; otherwise check manually for source coverage, flow/prototype/text consistency, permissions, status rules, session/concurrency handling, exception handling, required analytics table format, PV/UV analytics, and testable acceptance criteria.
+Before publishing, run a PRD self-check. If a `check-prd` skill is available, use it; otherwise check manually for source coverage, flow/prototype/text consistency, permissions, status rules, exception handling, required analytics table format, PV/UV analytics, and testable acceptance criteria.
 
 ### 8. Requirement Description Layout
 
@@ -233,7 +225,7 @@ Read `references/page-description-layout.md` when writing screen-level requireme
 - Requirement description sections must use a one-to-one screenshot-to-requirement layout when an HTML prototype exists: each requirement item starts with the matching HTML screenshot, followed immediately by its own requirement description. Do not batch all screenshots first and place descriptions elsewhere.
 - For app or mini-program screens: use a two-column layout. Left side is the prototype screenshot, right side is requirement details.
 - For PC pages: use a vertical layout. Screenshot on top, requirement details below.
-- Each page description should cover page goal, entry condition, displayed fields, user actions, validation, backend dependency, session dependency, concurrency/repeated-operation handling, empty/error states, and menu/core tracking events with PV/UV requirements in the required analytics table format.
+- Each page description should cover page goal, entry condition, displayed fields, user actions, validation, backend dependency, empty/error states, and menu/core tracking events with PV/UV requirements in the required analytics table format.
 
 ### 9. Feishu Writeback
 
@@ -260,7 +252,6 @@ Before finalizing:
 - Medium and large PRDs contain a separate, legible business architecture whiteboard covering sources, processing/aggregation, core capabilities, and downstream results.
 - Requirement descriptions match the screenshots/prototype.
 - Status machine and permission matrix are explicit when behavior varies by status or role.
-- Session involvement and concurrency involvement are explicitly answered, with rules documented when involved.
 - Redrawn prototype images preserve the original interaction and do not introduce unapproved requirements.
 - Roles and permissions are explicit.
 - Analytics events map to menu exposure/click, core user actions, and business states, with PV and UV counting rules, required event_name naming, platform/module/trigger/role coverage, property list, property descriptions, lifecycle status, and the required table columns.
