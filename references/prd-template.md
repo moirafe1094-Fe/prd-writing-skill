@@ -1,178 +1,179 @@
-# PRD Template
+# 标准 PRD 模板（六章结构）
 
-Use this structure when no stronger user-provided PRD template overrides it.
+Use this structure when writing the final PRD body. Fields marked `*` are required.
 
-## 1. Requirement Background
+## 标题
 
-Cover:
+`xx域-xx模块-需求名称-版本号`
 
-- Current business context.
-- User pain point or operational gap.
-- Why now.
-- Expected business outcome.
-- Success metrics when available.
+Example: `商品管理域-SKU管理模块-SKU标签优化-20260401`
 
-## 2. Source Materials And Decisions
+---
 
-Use this when the PRD is assembled from Feishu references, demos, screenshots, or prior drafts.
+## 一、产品模块概述
 
-| Type | Content | Rule |
-| --- | --- | --- |
-| Write target | The document/wiki/page to update | Only this document may be modified |
-| Read-only references | Background docs, PRD examples, flowcharts, data tables | Do not modify unless user explicitly says so |
-| Prototype assets | HTML demos, screenshots, image2 drafts, redrawn images | Keep mapping to requirement sections |
-| Decisions | Confirmed product decisions | Treat as PRD facts |
-| Assumptions/open questions | Unresolved items | Label clearly and do not present as final facts |
+### 1、产品模块迭代简述（新模块非必填）
 
-## 3. Goals, Scope, And Non-Goals
+- 上次模块迭代内容、版本（版本记录）
+- 上次模块迭代 PRD 链接
 
-Use a table:
+**版本记录表**
 
-| Type | Content |
-| --- | --- |
-| Goals | What the product must achieve |
-| In scope | What this PRD covers |
-| Out of scope | What this PRD will not solve |
-| Dependencies | External systems, upstream data, policy, finance, legal, or ops dependencies |
-
-## 4. Roles And Permissions
-
-Include:
-
-- Role definition.
-- Entry points.
-- Viewable data.
-- Allowed actions.
-- Forbidden actions.
-- Audit log requirements when actions affect money, inventory, task status, contracts, approvals, or customer data.
-
-Recommended table:
-
-| Role | Entry point | Viewable data | Allowed actions | Forbidden actions | Audit requirement |
-| --- | --- | --- | --- | --- | --- |
-
-## Business Architecture Diagram (Required For Medium/Large)
-
-For medium and large requirements, insert a separate Feishu whiteboard showing upstream/input sources, calculation/import paths, merge or aggregation rules, core capability/management layer, downstream allocation/application/query/audit results, and any bypass or ownership boundary. This diagram explains the stable business structure; it does not replace the process flowchart.
-
-## 5. Business Process Flowchart
-
-Use Feishu whiteboard-native diagrams for final PRD presentation. Read `feishu-whiteboard-flowcharts.md` before writing or inserting flowcharts.
-
-Required format:
-
-- Insert as a Feishu whiteboard block, preferably SVG whiteboard.
-- Do not leave raw Mermaid, PlantUML, SVG source, or screenshot-only diagrams in the final PRD.
-- Use role/phase swimlanes, rounded cards, arrows, status colors, and legends when the flow has multiple actors or statuses.
-- Split complex workflows into scenario-level diagrams.
-
-Use a flowchart to show:
-
-- Main success path.
-- Role/status branching.
-- Exception handling.
-- End states.
-
-Recommended visual patterns:
-
-| Scenario | Recommended diagram |
-| --- | --- |
-| End-to-end business process | Phase-row or swimlane SVG whiteboard |
-| Approval/reject/timeout flow | Role swimlane SVG whiteboard |
-| Page/status relationship | Page/status map SVG whiteboard |
-| Cross-terminal APP/PC/backend process | Multi-column page map plus status strip |
-
-## 6. Page And State Inventory
-
-Write this before detailed page requirements.
-
-| Page/module | Actor | Entry condition | Core action | Key state | Exception state |
-| --- | --- | --- | --- | --- | --- |
-
-## 7. Requirement Description
-
-For each page/module:
-
-- Page/module name.
-- Prototype screenshot placement according to platform layout rules.
-- Page goal.
-- Entry condition.
-- Displayed fields.
-- User actions.
-- Validation rules.
-- Backend/data dependency.
-- Empty, loading, disabled, failed, expired, and repeated-submit states.
-- Tracking events.
-
-## 8. Status And Rules
-
-Add when behavior depends on status.
-
-Recommended table:
-
-| Status | Definition | Entry condition | User/system action | Next status |
+| 版本号 | 核心修改内容 | 修订人 | 修订时间 | PRD链接 |
 | --- | --- | --- | --- | --- |
+| 1.0 | | | | |
 
-## 9. Interfaces, Fields, And Data
+### 2、产品模块规划
 
-Include only when useful for execution:
+最新产品模块规划链接或大图
 
-- API or service name.
-- Purpose.
-- Request fields.
-- Response fields.
-- Error codes.
-- Idempotency and retry rules.
-- Data ownership and source of truth.
+### 3、MRD
 
-Recommended field table:
+业务需求 MRD 链接或摘要
 
-| Field | Meaning | Source of truth | Required | Validation/display rule |
-| --- | --- | --- | --- | --- |
+---
 
-## 10. Analytics Events
+## 二、需求与背景分析
 
-Use this output structure for the analytics section. Do not replace it with a generic Event/Trigger/Properties table, the previous Data设计/字段枚举 block, or the old 名称/发起方/动作类型 table.
+### *1、需求背景
+
+实际业务场景、用户痛点或需求
+
+### *2、需求目标（包含关键指标）
+
+基于背景，在本次产品迭代中，业务希望达到的目的。需要与业务共识清楚，尽可能量化、细化
+
+### *3、目标用户
+
+角色、场景、行为说明、权限说明
+
+### *4、核心价值（量化）
+
+业绩、效率、成本、风险控制、体验、基础能力
+
+### *5、需求成本（预估）
+
+预估投入资源（人力、服务费等），换算为 RMB
+
+### 6、竞品分析
+
+大模块、核心模块、0-1 构建，需要有竞品分析。不涉及则写：**本需求不涉及**
+
+---
+
+## 三、产品实现方案
+
+### *1、基础信息
+
+组织、角色权限、数据权限，需要以用户视角
+
+角色和场景说明：什么角色，预期什么，通过什么，实现什么
+
+### *2、业务流程图
+
+以业务视角，角色在什么系统做什么操作，业务节点如何流转
+
+- 基于业务流程图标记「新增」「修改」
+- 针对调整的部分明确标记并说明
+- 最终呈现：飞书画板泳道图（SVG）
+
+### *3、产品流程图
+
+基于不同产品类型，输出不同的图示：
+
+- 整体抽象模型
+- App 产品：流程图和页面流转图
+- 中台产品：系统层级图、角色时序图
+
+最终呈现：飞书画板角色时序图（SVG）
+
+### *4、界面设计及功能说明
+
+（1）原型图 + 功能布局
+
+（2）功能清单：功能点
+
+（3）需求功能点逻辑描述
+
+（4）交互设计描述
+
+（5）异常场景
+
+（6）案例说明
+
+（7）场景是否涉及 Session 处理机制
+
+（8）场景是否高并发
+
+需要体现页面层级和页面关联性
+
+### *5、数据指标
+
+| 指标名称 | 类型 | 指标定义与口径 | 变更说明 | 所在页面 | 数据来源 |
+| --- | --- | --- | --- | --- | --- |
+| | 新增/改动 | | 本次如何调整（改动时填写） | | |
+
+---
+
+## 四、数据埋点
+
+**门控**：本需求是否涉及埋点？否 → 本章正文写 **本需求不涉及**，保留章节标题。
+
+### 1、数据复盘或监测的指标描述
+
+### 2、数据分析的拆解
+
+### *3、数据埋点需求
 
 | 埋点ID | 事件名（event_name） | 事件名 | 端 | 模块/页面 | 触发时机 | 角色 | 属性清单 | 属性说明 | 状态 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 唯一编号 | 英文 snake_case，全局唯一 | 业务可读名称 | Android/iOS/PC/H5/小程序/后台 | 页面或功能模块 | 何时上报（精确到动作） | 触发用户角色 | 键值对清单 | 每个属性的类型、含义、枚举 | 点位生命周期状态 |
-| TRK-REQ-001-001 | order_submit_click | 提交订单按钮点击 | 造旺App、造旺PC | 订单确认页 | 用户点击「提交订单」且校验通过后 | 合伙人、区域经理 | order_id, amount, sku_count | amount: number，单位元 | 待评审/已评审/开发中/已上线/已废弃 |
+| TRK-REQ-001-001 | order_submit_click | 提交订单按钮点击 | App、PC | 订单确认页 | 用户点击「提交订单」且校验通过后 | 区域经理 | order_id, amount | amount: number，单位元 | 待评审 |
 
 Table rules:
 
-- 埋点ID: use a globally unique tracking point id, such as `TRK-REQ-001-001`. Keep numbering stable after review.
-- 事件名（event_name）: use English `snake_case`; keep it globally unique and stable for implementation.
-- 事件名: write a business-readable Chinese event name.
-- 端: list every applicable terminal, such as Android, iOS, PC, H5, 小程序, 后台, or specific app names.
-- 模块/页面: write the page or functional module where the event happens.
-- 触发时机: state exactly when the event is reported, precise to the user/system action and validation condition.
-- 角色: list the triggering user role.
-- 属性清单: list property keys as a comma-separated key list. Include PV/UV-related identity or counting properties when needed.
-- 属性说明: explain each property's type, meaning, unit, enum, and UV deduplication rule when relevant.
-- 状态: use lifecycle statuses such as 待评审, 已评审, 开发中, 已上线, or 已废弃.
+- 埋点ID: globally unique, e.g. `TRK-REQ-001-001`
+- 事件名（event_name）: English `snake_case`, globally unique
+- 属性清单 / 属性说明: include PV/UV counting and UV deduplication key when needed
 
-The analytics plan must include menu exposure/click events and core behavior events. Each event should state PV/UV collection requirements through 属性清单 and 属性说明. UV commonly deduplicates by employeeId, userId, device_id, or another agreed identity within the selected time window.
+---
 
-## 11. Risk And Exception Handling
+## 五、运营落地计划
 
-Cover:
+### *1、运营方案
 
-- Permission risk.
-- Fraud/collusion risk.
-- Data consistency risk.
-- Financial/compliance risk.
-- Privacy and sensitive data handling.
-- Manual review or fallback path.
+运营角色、执行动作、观测指标；核心运营策略、异常处理方案
 
-## 12. Acceptance Checklist
+### *2、执行节奏
 
-Write as testable statements:
+整体产品上线运营计划
 
-- User can complete the main flow.
-- Each role sees only permitted data/actions.
-- Each exception state has a visible and recoverable behavior.
-- Status and data updates are idempotent.
-- Menu and core behavior analytics use the required table columns, event_name naming, property list, property descriptions, lifecycle status, and fire at required points with PV and UV counting rules verified.
-- Flowchart, prototype, and PRD text are consistent.
-- The target Feishu document was the only modified reference.
+### *3、反馈机制
+
+如何收集用户反馈，反馈体量
+
+### *4、数据调整
+
+历史数据是否需要调整，如果调整规则是什么，技术如何操作。不涉及则写：**本需求不涉及**
+
+---
+
+## 六、项目计划
+
+### 1、需求排期开发表
+
+| 阶段 | 负责人 | 计划时间 | 备注 |
+| --- | --- | --- | --- |
+| | | | |
+
+### 2、风险描述
+
+| 风险 | 影响 | 应对措施 |
+| --- | --- | --- |
+| | | |
+
+---
+
+## PRD 质量要求
+
+- 产品经理 PRD 需要图文并茂
+- PRD 在飞书管理（创建/更新飞书文档）

@@ -1,163 +1,66 @@
 # PRD Writing Skill
 
-`prd-write` is a Codex/OpenSkills skill for turning product ideas, drafts, Feishu docs, screenshots, and prototypes into structured PRDs.
-
-It is designed for product managers and builders who want a repeatable workflow:
-
-1. Inventory source materials and protect the single target document.
-2. Clarify requirements with Superpowers `using-superpowers` and `brainstorming`.
-3. Create a requirement brief plus page/state inventory.
-4. Generate a first-pass visual prototype with imagegen.
-5. Build or inspect an interactive HTML demo to validate real interactions.
-6. Capture demo screens and optionally redraw them for cleaner PRD presentation.
-7. Write and self-check the final PRD with business background, roles, permissions, process flow, requirement descriptions, analytics events, and acceptance criteria.
-
-## What It Helps With
-
-- Writing PRDs from rough product ideas.
-- Rewriting or restructuring existing PRD drafts.
-- Turning HTML prototypes into product requirements.
-- Creating Feishu-ready PRDs with flowcharts and screenshots.
-- Describing app, mini-program, and PC page requirements consistently.
-- Keeping prototype visuals, interactions, analytics, and acceptance criteria aligned.
+`prd-write` is a Codex/OpenSkills/Cursor skill for writing structured PRDs with **field-by-field user confirmation** against a six-chapter template, then publishing to Feishu.
 
 ## Workflow
 
-### 1. Requirement Clarification
+1. **Inventory sources** — mark the single Feishu write target; everything else is read-only.
+2. **First brainstorming** — clarify requirements (MECE), output a requirement brief.
+3. **Field-by-field confirmation** — walk the six-chapter template one field at a time; required fields must be answered; skipped modules write **本需求不涉及**.
+4. **Second brainstorming** — before Chapter 3 (产品实现方案), clarify solution design (roles, flows, pages, exceptions, metrics).
+5. **Confirm flows in text, then draw** — business swimlane diagram (3.2) and product sequence diagram (3.3) via Feishu whiteboard SVG; never draw before user confirms the text flow.
+6. **Analytics gate** — ask whether the requirement involves tracking; if not, Chapter 4 writes **本需求不涉及**.
+7. **Optional prototype** — imagegen / HTML demo only when explicitly requested.
+8. **Feishu writeback** — create PRD in the user-specified location, or personal cloud drive by default.
 
-The skill first inventories sources, marks the write target, then clarifies:
+## Six-Chapter Template
 
-- Business background and goals.
-- User roles and permissions.
-- Product scope and non-goals.
-- Main workflow and exception paths.
-- Platform type: app, mini-program, PC web, backend, or mixed.
-- Compliance, money, data, audit, and operational risks.
+| Chapter | Key sections |
+| --- | --- |
+| 一、产品模块概述 | 迭代简述, 模块规划, MRD |
+| 二、需求与背景分析 | 背景*, 目标*, 用户*, 价值*, 成本*, 竞品 |
+| 三、产品实现方案 | 基础信息*, 业务流程图*, 产品流程图*, 界面功能*, 数据指标* |
+| 四、数据埋点 | 门控：是否涉及埋点；指标, 拆解, 埋点表 |
+| 五、运营落地计划 | 运营方案*, 节奏*, 反馈*, 数据调整 |
+| 六、项目计划 | 排期, 风险 |
 
-If [Superpowers](https://github.com/obra/superpowers) is installed, the skill asks Codex to use `using-superpowers` and `brainstorming` first.
-
-The output is a short requirement brief: product intent, business goal, users, scope, main path, exception paths, assumptions, open questions, and recommended next artifact.
-
-### 2. Page And State Inventory
-
-Before image generation or HTML work, the skill lists every page/module, actor, entry condition, core action, state transition, exception state, and tracking event.
-
-This keeps visual prototypes from inventing business coverage and makes the later PRD easier to verify.
-
-### 3. First-Pass Visual Prototype
-
-After clarification, the skill uses imagegen to generate static visual prototypes from the product description.
-
-This step helps align page hierarchy, product feel, and workflow coverage before building an interactive demo.
-
-### 4. Interactive HTML Demo
-
-The skill then uses the visual prototype as the basis for an interactive HTML demo.
-
-The HTML demo is treated as the source of truth for:
-
-- Page inventory.
-- Navigation.
-- Branching.
-- State transitions.
-- Empty/error states.
-- Required fields and backend dependencies.
-
-It validates the demo with a compact screen-action-result matrix before screenshots become PRD evidence.
-
-### 5. PRD Screenshots
-
-Before writing the final PRD, screenshots from the interactive demo can be redrawn with imagegen for a cleaner presentation.
-
-The redraw step must preserve the original interaction, fields, wording, page states, and information hierarchy. It should not invent new requirements.
-
-### 6. Business Artifacts
-
-Before the final PRD is written, the skill prepares the flowchart, roles/permissions matrix, status machine, field/data dictionary, analytics plan, and acceptance checks.
-
-### 7. PRD Writing
-
-The final PRD includes:
-
-- Requirement background and goals.
-- Scope and non-goals.
-- Roles and permissions.
-- Business process flowchart.
-- Requirement description.
-- Status rules or state machine.
-- Data/interface requirements when needed.
-- Analytics events.
-- Risk and exception handling.
-- Acceptance checklist.
-
-Before Feishu writeback, the skill runs a self-check for source coverage, flow/prototype/text consistency, permissions, status rules, analytics, and testable acceptance criteria.
-
-## Screenshot Layout Rules
-
-For app or mini-program screens:
-
-- Use a two-column layout.
-- Left: prototype screenshot.
-- Right: requirement details.
-
-For PC pages:
-
-- Use a vertical layout.
-- Screenshot on top.
-- Requirement details below.
+See `references/prd-template.md` for the full template and `references/field-confirmation-checklist.md` for the confirmation script.
 
 ## Installation
-
-### Option 1: Clone Into Your Skills Directory
 
 ```bash
 mkdir -p ~/.agents/skills
 git clone https://github.com/moirafe1094-Fe/prd-writing-skill.git ~/.agents/skills/prd-write
 ```
 
-Restart Codex, then verify:
+For Cursor:
+
+```bash
+mkdir -p ~/.cursor/skills
+git clone https://github.com/moirafe1094-Fe/prd-writing-skill.git ~/.cursor/skills/prd-write
+```
+
+Verify:
 
 ```bash
 npx openskills read prd-write
 ```
 
-### Option 2: Copy The Skill Folder
+## Companion Skills
 
-Copy this repository folder to:
-
-```bash
-~/.agents/skills/prd-write
-```
-
-or:
-
-```bash
-~/.codex/skills/prd-write
-```
-
-Then restart Codex.
-
-## Recommended Companion Skill
-
-Install Superpowers if you want stronger requirement clarification and design exploration:
-
-```bash
-git clone https://github.com/obra/superpowers.git ~/.codex/superpowers
-mkdir -p ~/.agents/skills
-ln -s ~/.codex/superpowers/skills ~/.agents/skills/superpowers
-```
-
-Restart Codex after installing.
-
-If your agent discovers skills from `~/.agent/skills` instead of `~/.agents/skills`, either sync the Superpowers `skills/` folders into the project `.agent/skills/` directory or create direct symlinks for each skill there.
+- **brainstorming** — required for requirement and solution design clarification
+- **lark-doc** / **lark-drive** / **lark-whiteboard** — Feishu document and diagram output
 
 ## Repository Contents
 
 ```text
 SKILL.md
-agents/openai.yaml
 references/prd-template.md
+references/field-confirmation-checklist.md
+references/feishu-whiteboard-flowcharts.md
 references/page-description-layout.md
+evals/
+agents/openai.yaml
 ```
 
 ## License

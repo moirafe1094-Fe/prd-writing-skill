@@ -1,3 +1,3 @@
 display_name: PRD Write
-short_description: Clarify product needs, prototype flows, and write structured PRDs.
-default_prompt: Turn a product idea, draft, or prototype into a complete PRD with flowcharts, page requirements, analytics, and acceptance criteria.
+short_description: Brainstorm, confirm fields step-by-step, and write six-chapter PRDs to Feishu.
+default_prompt: Walk the six-chapter PRD template field-by-field with me, then publish a complete PRD to Feishu with whiteboard flow diagrams.
