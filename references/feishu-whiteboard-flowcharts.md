@@ -1,108 +1,86 @@
 # Feishu Whiteboard Flowchart Rules
 
-Use this reference when a PRD needs business process flowcharts, page/status maps, approval flows, lifecycle diagrams, or role collaboration diagrams.
+Use this reference when a PRD needs business process flowcharts or product flow diagrams.
+
+## Two-Step Rule: Confirm Flow In Text First, Then Draw
+
+**Never draw before the user confirms the text flow.**
+
+1. **Text confirmation**: List roles, steps, branches, exceptions, start/end nodes in plain language. Get explicit user approval.
+2. **Whiteboard output**: Only after approval, create the Feishu whiteboard diagram with `lark-whiteboard`.
+
+Applies to:
+
+- **3.2 业务流程图** → swimlane SVG whiteboard
+- **3.3 产品流程图** → role sequence / page-flow SVG whiteboard
+
+If the user changes the flow after seeing the diagram, update the text confirmation first, then redraw.
+
+## Diagram Type Mapping
+
+| PRD section | Diagram type | Whiteboard format |
+| --- | --- | --- |
+| 3.2 业务流程图 | Business process swimlane | SVG swimlane with actor/phase lanes |
+| 3.3 产品流程图 | Product flow / role sequence | SVG sequence or page-flow map |
 
 ## Final Output Rule
 
-The final Feishu PRD must present flowcharts as Feishu whiteboard blocks. Do not leave raw Mermaid, PlantUML, SVG source text, code blocks, or screenshot-only diagrams as the final output.
-
-Preferred output by complexity:
+The final Feishu PRD must present diagrams as Feishu whiteboard blocks. Do not leave raw Mermaid, PlantUML, SVG source text, code blocks, or screenshot-only diagrams as the final output.
 
 | Diagram complexity | Final Feishu format |
 | --- | --- |
 | Simple flow, under 12 nodes | `<whiteboard type="svg">` |
-| Medium flow, 12-30 nodes, clear phases | `<whiteboard type="svg">` with grouped lanes/sections |
-| Complex flow, many branches, cross-role status map | Blank Feishu whiteboard plus `lark-whiteboard` editable SVG/native nodes |
-| Approval-heavy process | SVG whiteboard swimlane or phase-row diagram |
-| Page/status relationship map | SVG whiteboard page/status map |
+| Medium flow, 12-30 nodes | `<whiteboard type="svg">` with grouped lanes |
+| Complex flow, many branches | Blank whiteboard + `lark-whiteboard` editable nodes |
 
 ## Visual Style
 
-Create diagrams similar to polished product whiteboards:
-
-- Use a title and subtitle at the top.
-- Use phase rows, swimlanes, or grouped bands to separate actors, lifecycle stages, pages, or status domains.
-- Use rounded cards for steps, pages, states, decisions, and outcomes.
-- Use arrows for primary flow, dashed arrows for fallback/return/async paths, and colored arrows for exception branches.
-- Use small numbered chips for ordered steps.
-- Use a compact legend for role, page, status, pass/fail, timeout, freeze, or rollback semantics.
-- Keep labels concise and product-facing.
-- Leave enough spacing so Feishu reviewers can read the diagram at 50%-70% zoom.
+- Title and subtitle at the top
+- Phase rows or swimlanes for actors, lifecycle stages, or pages
+- Rounded cards for steps, pages, states, decisions
+- Arrows for primary flow; dashed for fallback; colored for exceptions
+- Compact legend when status colors are meaningful
+- Readable at 50%-70% zoom
 
 ## Color Semantics
 
-Use consistent colors:
-
-| Meaning | Color direction |
+| Meaning | Color |
 | --- | --- |
-| Primary flow / default action | Blue |
-| Approved / effective / completed | Green |
-| Review / freeze / pending review | Purple |
-| Rejected / failed / voided | Red |
-| Timeout / pending / manual intervention | Orange or yellow |
-| Neutral background lane | Light blue, light purple, light green, or light gray |
-| Notes / constraints | Pale yellow or light gray |
+| Primary flow | Blue |
+| Approved / completed | Green |
+| Review / pending | Purple |
+| Rejected / failed | Red |
+| Timeout / manual intervention | Orange or yellow |
+| Neutral lane background | Light blue, gray |
 
-## Diagram Types
+## Text Confirmation Template (before drawing)
 
-### Business Process Flow
+Use this format when confirming with the user:
 
-Use when describing an end-to-end business process.
+```markdown
+### 业务流程（待确认）
 
-Required content:
+**场景**：[scenario name]
+**参与角色**：[role A, role B, system]
+**主路径**：
+1. [role] → [action] → [result]
+2. ...
+**分支/异常**：
+- 若 [condition] → [branch]
+**新增/修改标记**：[node X 新增, node Y 修改]
+**起止**：[start] → [end]
+```
 
-- Actor or phase lanes.
-- Main success path.
-- Key review/approval nodes.
-- Exception branches.
-- End states.
-- Legend if statuses or colors are meaningful.
-
-### Page And Status Map
-
-Use when describing how pages, roles, and statuses relate.
-
-Required content:
-
-- Role/page cards grouped by app/PC/backend or actor.
-- Status transition strip or phase row.
-- Page entry and exit conditions.
-- Shared data/state notes.
-- Cross-terminal sync notes when applicable.
-
-### Approval Or Freeze/Unfreeze Flow
-
-Use when approval, freezing, settlement, audit, or risk control is central.
-
-Required content:
-
-- Submitter lane.
-- Reviewer lane.
-- System/risk-control lane when applicable.
-- Approve/reject/timeout branches.
-- Data or money/status effect after each branch.
-- Final state card.
-
-## SVG Whiteboard Construction Guidance
-
-When generating `<whiteboard type="svg">`:
-
-- Use an SVG viewport large enough for readability, usually 1200-1800px wide.
-- Use `rect` with rounded corners for cards and lanes.
-- Use `text` for labels; avoid tiny text.
-- Use `path` or `line` with arrow markers for connectors.
-- Use consistent spacing and alignment.
-- Include a subtle background and lane bands when the diagram has multiple roles or phases.
-- Keep the SVG self-contained; do not reference external assets.
-- Do not paste SVG as a code block in the final PRD. Insert it as a Feishu whiteboard block.
+For product flow (3.3), add page/system names and interaction order between roles.
 
 ## Writeback Rules
 
-When the target is a Feishu doc/wiki:
+- Insert the whiteboard block near the related PRD section (3.2 or 3.3).
+- Export or preview after insertion; verify legibility and connector direction.
+- One diagram per scenario unless the user asks for a combined overview.
+- Caption example: `订单审核业务全流程` or `App 端页面与状态流转图`
 
-- Insert the flowchart as a whiteboard block near the related PRD section.
-- For simple/medium SVG diagrams, use `<whiteboard type="svg">`.
-- For complex diagrams, create or update a Feishu whiteboard with `lark-whiteboard`.
-- Confirm the visible Feishu block renders as a diagram, not raw source text.
-- Use the diagram caption to name the scenario, such as `抄单审核与旺金币冻结业务全流程` or `拜访计划与日复盘角色页面与状态地图`.
-- Keep one diagram per scenario unless the user explicitly asks for a combined overview.
+## Skills
+
+- Create/update whiteboards: `lark-whiteboard`
+- Insert into Feishu doc: `lark-doc` (see `lark-doc-whiteboard.md`)
