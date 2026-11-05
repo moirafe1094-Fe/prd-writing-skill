@@ -4,7 +4,7 @@ description: >-
   Structured PRD writing with field-by-field user confirmation against the
   six-chapter PRD template, brainstorming for requirement and solution design
   clarification, Feishu doc output with whiteboard swimlane/sequence diagrams,
-  and a required prototype image or HTML file in the interface section. Use when the user asks to write, update, or
+  and a required prototype in the interface section (HTML component block by default; screenshot only when no HTML exists). Use when the user asks to write, update, or
   publish a PRD/需求文档/产品方案, especially when requirements must be confirmed
   step-by-step before Feishu writeback.
 ---
@@ -36,7 +36,7 @@ Do not skip to PRD writing or Feishu output before field confirmation is complet
 Keep the six-chapter structure; write only information that changes product understanding, implementation, testing, or decisions.
 
 - Start sections with business facts, not document meta.
-- Omit narration such as "本 PRD 以原型为依据" when the attachment already shows it.
+- Omit narration such as "本 PRD 以原型为依据" when the prototype already shows it.
 - Use direct product language: "支持…", "点击后…", "校验失败时…".
 - When a module is not applicable, write **本需求不涉及** under that section (keep the heading).
 - Chapter 6 heading is **六. 验收功能清单**. Section 1 lists one acceptance point per line, in a short phrase such as 「支持…」「点击后…」「展示…」. Do not write schedules, owners, or repeat background, formulas, and exceptions already covered earlier. Section 2 keeps **风险说明** as a risk / impact / response table.
@@ -140,16 +140,18 @@ Before Chapter 4 fields, ask: **本需求是否涉及埋点？**
 
 ### 6. Prototype Asset (Required)
 
-Chapter 3.4（1）原型图与功能布局 must contain a visible image or an HTML file inside the Feishu doc. A text description alone is not a prototype. Do not publish, and do not treat the PRD as complete, when this section has neither.
+Chapter 3.4（1）原型图与功能布局 must contain a visible prototype inside the Feishu doc. A text description alone is not a prototype. Do not publish, and do not treat the PRD as complete, when this section has none.
 
-Insert the asset directly under that heading. Leaving it only on disk, or only at the end of the document, does not count.
+Insert the prototype directly in that section. Leaving it only on disk, or only at the end of the document, does not count.
 
-Use one of these:
+- **HTML exists → HTML component block (default).** Insert each self-contained HTML as `<html5-block path="@./x.html"/>`, not as a file attachment card. Do not add screenshots of that HTML anywhere in the PRD.
+- **No HTML → image.** Screenshot of the current page, or a design image of the changed screen. Do not invent unapproved logic.
 
-- **Image**: screenshot of the current page, or a design image of the changed screen. Do not invent unapproved logic.
-- **HTML**: one self-contained file attached in that section. Mixed PC + App: two separate files. Read `references/page-description-layout.md` for layout.
+Order inside the section: for each prototype group, a bold title line → the component block → the page descriptions for that prototype (page heading, 页面目标, module table / list). Descriptions always come after the block, never before it or beside it.
 
-Either an image or an HTML file satisfies the rule. Text can sit beside the asset; it cannot replace it.
+Mixed PC + App: separate HTML files, each its own component block group; PC groups first, then App.
+
+Read `references/page-description-layout.md` for the XML structure and the embedding rules (required meta tags, fit-to-width scaling, size limit, verification). For scaling, never zoom or transform `html` / `body`: Feishu measures the unscaled height, which leaves blank space under the block. Scale an inner wrapper, and set the outer wrapper's height to the scaled height.
 
 ---
 
@@ -173,7 +175,8 @@ When the target is Feishu:
 - Use `lark-doc` to create or update the document.
 - Use `lark-drive` to resolve folder path or personal cloud drive location.
 - Insert whiteboard blocks for 3.2 and 3.3 diagrams.
-- Insert the prototype image or HTML file under 3.4（1）原型图与功能布局. A doc with only prototype text is incomplete.
+- Insert the prototype under 3.4（1）原型图与功能布局: HTML component blocks when HTML exists, images only when it does not. A doc with only prototype text is incomplete.
+- After writing, fetch the doc and confirm the `html5-block` count matches the number of HTML files, and that no screenshot of an embedded HTML remains.
 - Confirm before high-impact overwrite of existing PRD content.
 
 If CLI credentials are unavailable, prepare a self-contained script and tell the user exactly what it will modify.
@@ -190,7 +193,9 @@ Before finalizing:
 - [ ] Analytics gate handled (涉及埋点 → table; 否 → 本需求不涉及)
 - [ ] Six-chapter template structure preserved
 - [ ] Chapter 6 is 验收功能清单: short function points, plus 风险说明
-- [ ] Chapter 3.4（1）原型图与功能布局 contains an image or an HTML file in the Feishu doc. Text-only prototype sections fail this check.
+- [ ] Chapter 3.4（1）原型图与功能布局 contains the prototype in the Feishu doc: HTML component blocks when HTML exists (no attachment cards, no screenshots of that HTML), images only when no HTML exists. Text-only prototype sections fail this check.
+- [ ] Each prototype group is ordered title → component block → page descriptions.
+- [ ] Embedded HTML scales an inner wrapper, not `html` / `body`. The simulated auto-height check shows no blank strip under any block.
 - [ ] PRD created in specified Feishu location or personal cloud drive
 - [ ] Only the write target was modified
 - [ ] No unnecessary meta prose
@@ -202,4 +207,4 @@ Before finalizing:
 | `references/prd-template.md` | Assembling final PRD body |
 | `references/field-confirmation-checklist.md` | During field-by-field loop |
 | `references/feishu-whiteboard-flowcharts.md` | Before creating flow diagrams |
-| `references/page-description-layout.md` | Optional prototype screenshot layout |
+| `references/page-description-layout.md` | Before inserting prototypes: HTML component block layout and embedding, screenshot fallback |
