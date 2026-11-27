@@ -21,7 +21,7 @@ If the user changes the flow after seeing the diagram, update the text confirmat
 | PRD section | Diagram type | Whiteboard format |
 | --- | --- | --- |
 | 4.1 业务流程图 | Business process swimlane, 新增/修改 nodes marked | SVG swimlane with actor/system lanes |
-| 4.2 产品流程图 — general / new module | Overall abstract model | SVG grouped-region model |
+| 4.2 产品流程图 — general (neither App nor 中台) | Overall abstract model | SVG grouped-region model |
 | 4.2 产品流程图 — App | Flowchart + page-flow map | SVG flowchart and page-flow map |
 | 4.2 产品流程图 — 中台 | System layer diagram + role sequence diagram | SVG layer diagram and sequence diagram |
 
