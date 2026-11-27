@@ -213,7 +213,7 @@ Before finalizing:
 - [ ] Seven-chapter template structure and `一、` / `1、` numbering preserved
 - [ ] Chapter 一 has a fully filled conclusion sentence and all ten 关键结论速览 rows, consistent with the current later chapters (regenerated after any change to 三 / 四 / 六)
 - [ ] Chapter 一 is a level-1 heading like the other chapters
-- [ ] After review, 待拍板事项 shows 已定 / 待定 outcomes, not the open questions
+- [ ] First publish (before review): 待拍板事项 lists the open questions, or **无**. Post-review update only: it shows 已定 / 待定 outcomes instead
 - [ ] 3.5 需求成本 is in hours per role, plus cash only for AI / external API
 - [ ] Chapter 七 is the 验收清单 table: short 验收项, observable 预期结果, blank 验收结果
 - [ ] Chapter 4.3（1）原型HTML contains the prototype in the Feishu doc: HTML component blocks when HTML exists (no attachment cards, no screenshots of that HTML), images only when no HTML exists. Text-only prototype sections fail this check.
