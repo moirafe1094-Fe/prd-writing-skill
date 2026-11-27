@@ -42,7 +42,7 @@ Keep the seven-chapter structure; write only information that changes product un
 - Omit narration such as "本 PRD 以原型为依据" when the prototype already shows it.
 - Use direct product language: "支持…", "点击后…", "校验失败时…".
 - When a module is not applicable, write **本需求不涉及** under that section (keep the heading).
-- Heading numbering follows the Feishu template: `一、` for chapters, `1、` for sections, `1.1` only in Chapter 一.
+- Heading numbering follows the Feishu template: `一、` for chapters, `1、` for sections, `1.1` only in Chapter 一. All chapters, including Chapter 一, are level-1 headings; sections are level-2.
 - Chapter 一 is a summary for reviewers: one filled-in conclusion sentence plus the 关键结论速览 table, one sentence per row. It must not contradict or add scope beyond the later chapters.
 - Chapter 七 heading is **七、验收清单**, written as the 序号 / 验收项 / 预期结果 / 验收结果 / 验收人 table. 验收项 is a short phrase such as 「支持…」「点击后…」「展示…」. Leave 验收结果 blank. Do not write schedules, or repeat background, formulas, and exceptions already covered earlier.
 
@@ -168,6 +168,8 @@ After chapters 二 to 七 are confirmed, draft Chapter 一 from them:
 - **1.1 一句话结论**: fill every blank of 「为 ______ 解决 ______ 的问题，本期通过 ______ 实现 ______，上线后 ______ 从 ______ 提升至 ______。」 from 3.1 背景, 3.2 目标, 3.3 用户, and the solution. Without a baseline number, state the measurable target; do not invent one.
 - **1.2 关键结论速览**: 业务痛点 ← 3.1; 本次目标 ← 3.2; 本期范围（做）/ 本期不做 ← confirmed Chapter 四 (brief non-goals only where Chapter 四 is silent); 价值 ← 3.4; 影响面 ← 3.3 + Chapter 四 + 6.4; 关键风险 ← brief + exceptions.
 - Show the whole draft once for confirmation. Ask separately only for fields that cannot be derived: 待拍板事项 (write **无** when none), 需求单链接, and 影响面 / 关键风险 when earlier chapters do not cover them.
+- **Keep it current.** Whenever chapters 三, 四, or 六 change after the first draft — in this session or when updating an existing PRD — regenerate Chapter 一 from the updated content and confirm it before writeback.
+- **After review.** 待拍板事项 is the review agenda. When the user reports review outcomes, replace each item with `已定：……` or `待定：……（负责人、截止时间）`, and update the chapters those decisions affect.
 
 ---
 
@@ -194,6 +196,7 @@ When the target is Feishu:
 - Insert the prototype under 4.3（1）原型HTML: HTML component blocks when HTML exists, images only when it does not. A doc with only prototype text is incomplete.
 - After writing, fetch the doc and confirm the `html5-block` count matches the number of HTML files, and that no screenshot of an embedded HTML remains.
 - Confirm before high-impact overwrite of existing PRD content.
+- When updating an existing PRD, write the regenerated Chapter 一 in the same writeback as the chapter changes.
 
 If CLI credentials are unavailable, prepare a self-contained script and tell the user exactly what it will modify.
 
@@ -208,7 +211,9 @@ Before finalizing:
 - [ ] Business and product flows confirmed in text before whiteboard insertion; 4.2 diagram matches the product type
 - [ ] Analytics gate handled (涉及埋点 → table; 否 → 本需求不涉及)
 - [ ] Seven-chapter template structure and `一、` / `1、` numbering preserved
-- [ ] Chapter 一 has a fully filled conclusion sentence and all ten 关键结论速览 rows, consistent with later chapters
+- [ ] Chapter 一 has a fully filled conclusion sentence and all ten 关键结论速览 rows, consistent with the current later chapters (regenerated after any change to 三 / 四 / 六)
+- [ ] Chapter 一 is a level-1 heading like the other chapters
+- [ ] After review, 待拍板事项 shows 已定 / 待定 outcomes, not the open questions
 - [ ] 3.5 需求成本 is in hours per role, plus cash only for AI / external API
 - [ ] Chapter 七 is the 验收清单 table: short 验收项, observable 预期结果, blank 验收结果
 - [ ] Chapter 4.3（1）原型HTML contains the prototype in the Feishu doc: HTML component blocks when HTML exists (no attachment cards, no screenshots of that HTML), images only when no HTML exists. Text-only prototype sections fail this check.

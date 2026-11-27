@@ -4,6 +4,8 @@ Use this structure when writing the final PRD body. Fields marked `*` are requir
 
 Heading numbering follows the Feishu template: chapters use `一、`, sections use `1、`. Chapter 一 alone uses `1.1` / `1.2`. Example: `二、产品模块概述`, `1、需求背景`.
 
+Heading levels: every chapter, including 一、重点信息概述, is a level-1 heading; every section, including 1.1 / 1.2, is a level-2 heading. The Feishu template shows Chapter 一 as level 2; do not copy that, or the doc outline puts Chapter 一 at the same level as its own sections.
+
 ## 标题
 
 `xx域-xx模块-需求名称-版本号`
@@ -15,6 +17,8 @@ Example: `商品管理域-SKU管理模块-SKU标签优化-20260401`
 ## 一、重点信息概述
 
 Write this chapter last, from the confirmed fields in chapters 二 to 七. Do not ask for content that is already confirmed elsewhere.
+
+Whenever chapters 三, 四, or 六 change after the first draft, regenerate this chapter from the updated content and confirm it with the user before writeback.
 
 ### *1.1 一句话结论
 
@@ -37,6 +41,8 @@ Fill every blank. If the goal has no baseline number, state the measurable targe
 | 需求单链接 | |
 
 One sentence per row. Keep the row and write **无** when 待拍板事项 has no open item.
+
+待拍板事项 is the review agenda. After the review, replace each item with its outcome, e.g. `已定：……` or `待定：……（负责人、截止时间）`, and update the affected chapters to match.
 
 ---
 

@@ -15,6 +15,9 @@ User asks to write a PRD for a medium inventory-management feature. Some context
 - Agent deletes skipped sections instead of writing **本需求不涉及**.
 - Agent asks the user for Chapter 一 content that is already confirmed in later chapters, or writes Chapter 一 first.
 - Agent leaves blanks in the 1.1 conclusion sentence, or invents a baseline number.
+- User changes scope in Chapter 四 after Chapter 一 is drafted, and Chapter 一 still shows the old scope.
+- User reports review outcomes, and 待拍板事项 still lists the open questions.
+- Chapter 一 is written as a level-2 heading while chapters 二 to 七 are level-1.
 - Agent writes 需求成本 in RMB instead of hours per role.
 - Agent writes 验收清单 as a bullet list, fills 验收结果, or adds a separate 风险说明 table.
 - Agent adds sections that are not in the template: 1.3 MRD, 基础信息, 功能清单, 交互设计描述.
