@@ -2,7 +2,7 @@
 
 ## Choosing The Prototype Form
 
-| Situation | Prototype form in 3.4（1） |
+| Situation | Prototype form in 4.3（1）原型HTML |
 | --- | --- |
 | An HTML prototype exists | HTML component block (`html5-block`). No file attachment card, no screenshots of that HTML. |
 | No HTML, only current-page screenshots or design images | Images, per the screenshot fallback rules below. |

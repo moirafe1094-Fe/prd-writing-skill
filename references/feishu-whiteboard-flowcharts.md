@@ -11,8 +11,8 @@ Use this reference when a PRD needs business process flowcharts or product flow 
 
 Applies to:
 
-- **3.2 业务流程图** → swimlane SVG whiteboard
-- **3.3 产品流程图** → role sequence / page-flow SVG whiteboard
+- **4.1 业务流程图** → swimlane SVG whiteboard
+- **4.2 产品流程图** → SVG whiteboard chosen by product type (see the mapping below)
 
 If the user changes the flow after seeing the diagram, update the text confirmation first, then redraw.
 
@@ -20,8 +20,12 @@ If the user changes the flow after seeing the diagram, update the text confirmat
 
 | PRD section | Diagram type | Whiteboard format |
 | --- | --- | --- |
-| 3.2 业务流程图 | Business process swimlane | SVG swimlane with actor/phase lanes |
-| 3.3 产品流程图 | Product flow / role sequence | SVG sequence or page-flow map |
+| 4.1 业务流程图 | Business process swimlane, 新增/修改 nodes marked | SVG swimlane with actor/system lanes |
+| 4.2 产品流程图 — general (neither App nor 中台) | Overall abstract model | SVG grouped-region model |
+| 4.2 产品流程图 — App | Flowchart + page-flow map | SVG flowchart and page-flow map |
+| 4.2 产品流程图 — 中台 | System layer diagram + role sequence diagram | SVG layer diagram and sequence diagram |
+
+Decide the product type in the second brainstorming. A mixed requirement gets one diagram per product type.
 
 ## Final Output Rule
 
@@ -71,11 +75,11 @@ Use this format when confirming with the user:
 **起止**：[start] → [end]
 ```
 
-For product flow (3.3), add page/system names and interaction order between roles.
+For product flow (4.2), add page/system names, page hierarchy, and interaction order between roles.
 
 ## Writeback Rules
 
-- Insert the whiteboard block near the related PRD section (3.2 or 3.3).
+- Insert the whiteboard block near the related PRD section (4.1 or 4.2).
 - Export or preview after insertion; verify legibility and connector direction.
 - One diagram per scenario unless the user asks for a combined overview.
 - Caption example: `订单审核业务全流程` or `App 端页面与状态流转图`
