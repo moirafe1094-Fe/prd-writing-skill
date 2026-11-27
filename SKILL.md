@@ -166,7 +166,7 @@ Read `references/page-description-layout.md` for the XML structure and the embed
 After chapters 二 to 七 are confirmed, draft Chapter 一 from them:
 
 - **1.1 一句话结论**: fill every blank of 「为 ______ 解决 ______ 的问题，本期通过 ______ 实现 ______，上线后 ______ 从 ______ 提升至 ______。」 from 3.1 背景, 3.2 目标, 3.3 用户, and the solution. Without a baseline number, state the measurable target; do not invent one.
-- **1.2 关键结论速览**: 业务痛点 ← 3.1; 本次目标 ← 3.2; 本期范围（做）/ 本期不做 ← brief + Chapter 四; 价值 ← 3.4; 影响面 ← 3.3 + Chapter 四 + 6.4; 关键风险 ← brief + exceptions.
+- **1.2 关键结论速览**: 业务痛点 ← 3.1; 本次目标 ← 3.2; 本期范围（做）/ 本期不做 ← confirmed Chapter 四 (brief non-goals only where Chapter 四 is silent); 价值 ← 3.4; 影响面 ← 3.3 + Chapter 四 + 6.4; 关键风险 ← brief + exceptions.
 - Show the whole draft once for confirmation. Ask separately only for fields that cannot be derived: 待拍板事项 (write **无** when none), 需求单链接, and 影响面 / 关键风险 when earlier chapters do not cover them.
 
 ---
